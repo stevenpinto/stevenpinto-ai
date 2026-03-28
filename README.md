@@ -50,13 +50,19 @@ The IAM role needs:
 | **Microsoft Clarity** (`w2y8zv15h3`) | Session recordings, heatmaps | Configured in `index.html` |
 | **LinkedIn Redirect** | Track resume-to-LinkedIn clicks | Link to `stevenpinto.com/linkedin` on resumes |
 
-### UTM Tracking for Resumes
+### UTM Tracking
 
-Use UTM-tagged URLs per company when sharing your site:
-```
-https://stevenpinto.com/?utm_source=companyname&utm_medium=resume
-https://stevenpinto.com/linkedin?utm_source=companyname&utm_medium=resume
-```
+Use UTM-tagged URLs to track where traffic comes from in GA4:
+
+| Use Case | URL |
+|----------|-----|
+| Resume link to site | `https://stevenpinto.com/?utm_source=companyname&utm_medium=resume` |
+| Resume link to LinkedIn | `https://stevenpinto.com/linkedin?utm_source=companyname&utm_medium=resume` |
+| LinkedIn article | `https://stevenpinto.com/?utm_source=linkedin&utm_medium=social&utm_campaign=article-name` |
+
+- `utm_source` — who sent the traffic (company name or platform)
+- `utm_medium` — channel type (`resume` or `social`)
+- `utm_campaign` — specific article or campaign name
 
 ## Adding/Updating Project Screenshots
 

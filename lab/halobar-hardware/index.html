@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HaloBar Hardware Build - Steven Pinto</title>
+  <meta name="description" content="The physical build of the automated bartender. Pump systems, electronics, enclosure design, and hardware integration.">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/lab-article.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3H5ZRCRHN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3H5ZRCRHN2');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","w2y8zv15h3");
+  </script>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo">SP</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../../#lab">&larr; Back</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <article class="lab-article">
+    <div class="container">
+      <div class="lab-article-header">
+        <span class="lab-status lab-status-building">Building</span>
+        <h1>HaloBar Hardware Build</h1>
+        <p class="lab-article-subtitle">The physical build of the automated bartender. Pump systems, electronics, enclosure design, and hardware integration.</p>
+        <div class="project-tech">
+          <span>Electronics</span><span>IoT</span><span>3D Printing</span><span>Hardware</span>
+        </div>
+      </div>
+
+      <div class="lab-article-body">
+        <h2>The Idea</h2>
+<p>
+<a href="https://myhalobar.com" target="_blank" rel="noopener">MyHaloBar</a> started as a software project, an app that lets you browse cocktails and place orders. But the whole point was always to connect it to real hardware that actually makes the drinks. This is the hardware side of that build.
+</p>
+
+<p>
+The goal is a self-contained unit with peristaltic pumps, a microcontroller, and a clean enclosure that can sit on a countertop. You pick a drink in the app, and the hardware pours it. No bartender required.
+</p>
+
+<img src="images/rendering.jpg" alt="AI-generated rendering of the HaloBar with cocktails" loading="lazy">
+
+
+<h2>The Stack</h2>
+<div class="lab-spec-grid">
+  <div class="lab-spec-card">
+    <h3>Software</h3>
+    <ul>
+      <li><strong>ESP32 / Arduino</strong> — microcontroller for pump control</li>
+      <li><strong>MQTT</strong> — communication with the app backend</li>
+      <li><strong>AWS IoT Core</strong> — cloud-to-device messaging</li>
+      <li><strong>Next.js app</strong> — frontend ordering interface</li>
+    </ul>
+  </div>
+  <div class="lab-spec-card">
+    <h3>Hardware</h3>
+    <ul>
+      <li><strong>16 peristaltic pumps</strong> — food-safe liquid dispensing</li>
+      <li><strong>Relay module</strong> — pump switching + sequencing</li>
+      <li><strong>12V power supply</strong> — drives pump motors</li>
+      <li><strong>3D-printed enclosure</strong> — Gemini-designed housing</li>
+    </ul>
+  </div>
+</div>
+<BR>
+
+
+<h2>How It Started</h2>
+<p>
+I started this project in 2023 using Home Assistant as the brains of the operation. It handled pump calibration, stored the recipes, and served as the user interface. Functionally, it worked. I could select a drink and the pumps would fire in the right order for the right duration.
+</p>
+
+<p>
+But the interface was terrible. Home Assistant is great for home automation, not for building a consumer-facing drink menu. And the housing was a struggle. I was trying to design an enclosure from scratch with no real CAD experience, and it showed.
+</p>
+
+<img src="images/pumps.jpg" alt="16 peristaltic pumps wired and labeled on a test board" loading="lazy">
+
+
+<h2>Where It Is Now</h2>
+<p>
+Fast forward to today and both of those problems are solved. The <a href="https://myhalobar.com" target="_blank" rel="noopener">MyHaloBar app</a> replaced Home Assistant entirely. The interface looks clean, the recipe management is proper, and the whole experience finally feels right.
+</p>
+
+<p>
+For the housing, I brought in Google Gemini. I'd describe what I wanted (dimensions, bottle placement, pump routing, nozzle positions) and it would generate OpenSCAD code that I could 3D print. Iterate, adjust, reprint. It turned what was months of frustration into a much faster design loop.
+</p>
+
+<img src="images/cad-render.gif" alt="OpenSCAD render of the HaloBar enclosure design" loading="lazy">
+
+<img src="images/enclosure.jpg" alt="3D-printed HaloBar enclosure with pumps installed" loading="lazy">
+
+
+<h2>The Build</h2>
+<p>
+The pump system uses 16 peristaltic pumps, one per ingredient. They're food-safe, self-priming, and volume is controlled by run duration. Each pump is wired through a relay module and driven by a 12V power supply. The microcontroller receives pour commands over MQTT via AWS IoT Core.
+</p>
+
+<p>
+The dispensing nozzles are mounted on the front column in a 4x4 grid. Each one maps to a specific pump and ingredient. You place a glass underneath, order from the app, and the system sequences the pumps to build the drink.
+</p>
+
+<img src="images/nozzles.jpg" alt="16 dispensing nozzles arranged in a 4x4 grid on the HaloBar column" loading="lazy">
+
+
+<h2>What's Next</h2>
+<ul>
+  <li>Finalize pour calibration across different liquids</li>
+  <li>End-to-end integration with the MyHaloBar app</li>
+  <li>Final enclosure iteration and finish</li>
+  <li>Add a drip tray and overflow detection</li>
+</ul>
+
+<div class="lab-article-footer">
+  <a href="../../#lab">&larr; Back</a>
+</div>
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/steve-ai-widget.js"></script>
+  <steve-ai-widget mode="public" api-url="https://aqjiq7s2t8.execute-api.us-east-1.amazonaws.com"></steve-ai-widget>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

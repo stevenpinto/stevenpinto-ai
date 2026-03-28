@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Local RAG Knowledge Base — Steven Pinto</title>
+  <meta name="description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/lab-article.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3H5ZRCRHN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3H5ZRCRHN2');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","w2y8zv15h3");
+  </script>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo">SP</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../../#lab">&larr; Back</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <article class="lab-article">
+    <div class="container">
+      <div class="lab-article-header">
+        <span class="lab-status lab-status-planning">Planning</span>
+        <h1>Local RAG Knowledge Base</h1>
+        <p class="lab-article-subtitle">A self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.</p>
+        <div class="project-tech">
+          <span>Ollama</span><span>AnythingLLM</span><span>RAG</span><span>LLM</span>
+        </div>
+      </div>
+
+      <div class="lab-article-body">
+        <h2>The Idea</h2>
+<p>
+I wanted something that felt like ChatGPT, but for my own data—and without sending anything to the cloud. 
+I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be. 
+Search works when you know what you're looking for. It falls apart when you don’t.
+</p>
+
+<p>
+The idea here is simple: take everything I care about—documents, notes, configs, random files, eventually email and shared drives—and make it searchable through natural language. 
+Ask a question, get an answer, and know where that answer came from.
+</p>
+
+<p>
+I also wanted to remove the dependency on tokens and external APIs. Not because they’re bad, but because they come with tradeoffs: cost, latency, and most importantly, data leaving your environment. 
+This system is meant to run entirely local. No usage limits. No surprises.
+</p>
+
+<p>
+At a higher level, this is less about building a tool and more about learning how modern AI systems actually work under the hood—especially the kind companies are starting to deploy internally.
+</p>
+
+
+<h2>The Stack</h2>
+<div class="lab-spec-grid">
+  <div class="lab-spec-card">
+    <h3>Core Stack</h3>
+    <ul>
+      <li><strong>Ollama</strong> — local LLM inference</li>
+      <li><strong>AnythingLLM</strong> — RAG pipeline + UI</li>
+      <li><strong>Docker</strong> — container orchestration</li>
+      <li><strong>Ubuntu Server</strong> — host OS</li>
+    </ul>
+  </div>
+  <div class="lab-spec-card">
+    <h3>Hardware</h3>
+    <ul>
+      <li><strong>RTX 3070</strong> — primary inference GPU</li>
+      <li><strong>64GB ECC RAM</strong> — memory for embeddings + vector DB</li>
+      <li><strong>NVMe storage</strong> — fast retrieval + indexing</li>
+    </ul>
+  </div>
+</div>
+<BR>
+
+<h2>Planning</h2>
+<p>
+I forced myself to keep this simple. It’s really easy to over-engineer this kind of project before you even know what’s useful.
+The first version is a single-node system:
+</p>
+
+<ul>
+  <li><strong>Ollama</strong> for running models locally</li>
+  <li><strong>AnythingLLM</strong> for ingestion, embeddings, and chat</li>
+  <li><strong>Docker on Ubuntu</strong> to keep everything contained and repeatable</li>
+</ul>
+
+<p>
+Hardware-wise, I’m using a repurposed server with 64GB of RAM and an RTX 3070 for inference. It’s more than enough to get something real working without turning this into a science project.
+</p>
+
+<p>
+I’m being intentional about what gets indexed. I’m not trying to dump an entire filesystem into a vector database and hope for the best. 
+Instead, I’m starting with curated data—documents that actually matter—and expanding from there.
+</p>
+
+<p>
+The plan is to layer this out over time:
+</p>
+
+<ul>
+  <li>Start with local files and a clean knowledge base</li>
+  <li>Add Synology and structured folders</li>
+  <li>Integrate Google Drive and Gmail with filtering</li>
+  <li>Eventually bring in system data and logs</li>
+</ul>
+
+<p>
+Longer term, this is also about portability. I want something that can evolve from a home lab into something I could realistically stand up inside a company—on hardware we already own.
+</p>
+
+
+<h2>Execution</h2>
+<p>
+Right now, this is in the build phase.
+The initial focus is getting the core loop working end-to-end:
+</p>
+
+<ul>
+  <li>Ingest documents</li>
+  <li>Chunk and embed them</li>
+  <li>Store them in a vector database</li>
+  <li>Query them through a local model</li>
+</ul>
+
+<p>
+That sounds straightforward, but the details matter. Chunking strategy, embedding quality, and filtering have a bigger impact on results than the model itself. 
+A smaller model with good context consistently beats a larger model with bad data.
+</p>
+
+<p>
+I’m also paying attention to performance. Local systems don’t have token limits, but they do have real constraints—GPU memory, disk speed, and indexing time. 
+So part of this is figuring out what actually scales and what just looks good on paper.
+</p>
+
+<p>
+The goal isn’t to make something flashy. It’s to make something I’d actually use. 
+If I can’t rely on it to answer real questions about my own data, it’s not done.
+</p>
+
+
+<h2>What I’m Learning</h2>
+<ul>
+  <li>Most of the value comes from the data pipeline, not the model</li>
+  <li>Indexing everything is worse than indexing the right things</li>
+  <li>RAG systems are only as good as their context quality</li>
+  <li>Local AI trades cost limits for infrastructure responsibility</li>
+  <li>Simple architectures are easier to evolve than “perfect” ones</li>
+</ul>
+
+
+<h2>What’s Next</h2>
+<ul>
+  <li>Improve ingestion with incremental updates instead of full re-indexing</li>
+  <li>Add better metadata and filtering for more accurate retrieval</li>
+  <li>Split data into logical workspaces (personal vs work)</li>
+  <li>Experiment with agents for multi-step workflows</li>
+  <li>Test a multi-node setup using spare server hardware</li>
+</ul>
+
+
+<h2>Why This Matters</h2>
+<p>
+This isn’t just a home lab project. It’s a way to understand how AI can actually be used inside an organization without handing data off to third parties.
+If this works the way I expect, the same pattern can be applied to:
+</p>
+
+<ul>
+  <li>internal documentation</li>
+  <li>support knowledge bases</li>
+  <li>operational data</li>
+  <li>institutional knowledge that usually gets lost over time</li>
+</ul>
+
+<p>
+The end goal is simple: make information easier to access, without adding more tools or complexity.
+</p>
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/steve-ai-widget.js"></script>
+  <steve-ai-widget mode="public" api-url="https://aqjiq7s2t8.execute-api.us-east-1.amazonaws.com"></steve-ai-widget>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

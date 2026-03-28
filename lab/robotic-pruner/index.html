@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Robotic Pruner — Steven Pinto</title>
+  <meta name="description" content="An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/lab-article.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3H5ZRCRHN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3H5ZRCRHN2');
+  </script>
+
+  <!-- Microsoft Clarity -->
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window,document,"clarity","script","w2y8zv15h3");
+  </script>
+</head>
+<body>
+
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="../../" class="nav-logo">SP</a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../../#lab">&larr; Back</a></li>
+      </ul>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <article class="lab-article">
+    <div class="container">
+      <div class="lab-article-header">
+        <span class="lab-status lab-status-planning">Planning</span>
+        <h1>AI Robotic Pruner</h1>
+        <p class="lab-article-subtitle">An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.</p>
+        <div class="project-tech">
+          <span>Computer Vision</span><span>Robotics</span><span>AI</span><span>IoT</span>
+        </div>
+      </div>
+
+      <div class="lab-article-body">
+        <h2>The Idea</h2>
+<p>
+This is one of those ideas that's been sitting in the back of my head for years.
+</p>
+
+<p>
+My brother-in-law runs a greenhouse with a couple hundred plants, and a big chunk of the work is just pruning. Over and over. It's repetitive, manual, and honestly feels like the kind of problem a robot should be able to help with.
+</p>
+
+<p>
+Back around 2020, I started thinking about building a robotic arm that could identify where to prune and make the cut. At the time, my approach looked like this:
+</p>
+
+<ul>
+  <li><strong>TensorFlow</strong> for training models</li>
+  <li><strong>OpenCV</strong> for image processing</li>
+  <li><strong>PlantCV</strong> for plant-specific analysis</li>
+  <li><strong>Unity</strong> for simulation</li>
+</ul>
+
+<p>
+That stack made sense then. It was very much computer vision first, robotics second. The idea was to analyze images, figure out what to cut, and then translate that into movement.
+</p>
+
+<p>
+Fast forward to now, and I would approach this very differently.
+</p>
+
+
+<h2>The Stack</h2>
+<p>
+Today, I'd build this as a robotics problem first, not just a vision problem.
+</p>
+
+<div class="lab-spec-grid">
+  <div class="lab-spec-card">
+    <h3>Software</h3>
+    <ul>
+      <li><strong>ROS 2 + MoveIt 2</strong> — motion planning + control</li>
+      <li><strong>PyTorch</strong> — segmentation model for plant structures</li>
+      <li><strong>OpenCV</strong> — calibration, geometry, cleanup</li>
+      <li><strong>NVIDIA Isaac Sim</strong> — simulation + testing</li>
+      <li><strong>ONNX Runtime</strong> — edge model deployment</li>
+    </ul>
+  </div>
+  <div class="lab-spec-card">
+    <h3>Hardware</h3>
+    <ul>
+      <li><strong>Robotic arm</strong> — 6-DOF for reach + precision</li>
+      <li><strong>Depth cameras</strong> — real 3D positioning</li>
+      <li><strong>Servo-driven scissors</strong> — cutting mechanism</li>
+      <li><strong>NVIDIA Jetson</strong> — edge compute</li>
+    </ul>
+  </div>
+</div>
+<BR>
+
+<p>
+PlantCV is still interesting, but I'd treat it as optional—more of a helper for plant structure analysis instead of the core of the system.
+</p>
+
+<p>
+The biggest shift is this: I'm not trying to detect leaves in an image anymore. I'm trying to understand a plant in 3D space and safely move a physical object through it. That's a very different problem.
+</p>
+
+
+<h2>The Approach</h2>
+<p>
+This won't start as a fully autonomous system. That's a good way to break plants and waste time.
+</p>
+
+<p>
+The first version will be more of a pruning assistant:
+</p>
+
+<ul>
+  <li>Identify candidate areas to prune</li>
+  <li>Highlight them visually</li>
+  <li>Let a human confirm</li>
+  <li>Eventually guide or position a robotic arm</li>
+</ul>
+
+<p>
+If that works reliably, then autonomy becomes a real conversation.
+</p>
+
+<p>
+For now, this is still in the planning phase. No hardware yet, no code running. Just a much clearer picture of how I'd build it today versus how I was thinking about it a few years ago.
+</p>
+
+<p>
+It's one of those projects where the tech finally caught up to the idea.
+</p>
+
+<div class="lab-article-footer">
+  <a href="../../#lab">&larr; Back</a>
+</div>
+      </div>
+    </div>
+  </article>
+
+  <script src="../../js/steve-ai-widget.js"></script>
+  <steve-ai-widget mode="public" api-url="https://aqjiq7s2t8.execute-api.us-east-1.amazonaws.com"></steve-ai-widget>
+
+  <script src="../../js/main.js"></script>
+</body>
+</html>

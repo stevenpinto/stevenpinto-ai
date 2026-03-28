@@ -620,6 +620,64 @@ img {
   color: var(--accent);
 }
 
+/* --- In the Lab --- */
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.lab-card {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--text);
+  position: relative;
+}
+
+.lab-card:hover {
+  color: var(--text);
+}
+
+.lab-card h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.lab-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.lab-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  width: fit-content;
+}
+
+.lab-status-planning {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.lab-status-building {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.lab-status-complete {
+  background: rgba(96, 165, 250, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+}
+
 /* --- Articles --- */
 .articles-grid {
   display: grid;
@@ -825,6 +883,10 @@ img {
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-grid {
     grid-template-columns: 1fr;
   }
 

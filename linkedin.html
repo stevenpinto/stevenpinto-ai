@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting to LinkedIn...</title>
+
+  <!-- Google Analytics 4 — same ID as index.html -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3H5ZRCRHN2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3H5ZRCRHN2');
+
+    // Fire an event so GA4 records this as a LinkedIn click
+    gtag('event', 'linkedin_redirect', {
+      event_category: 'outbound',
+      event_label: document.referrer || 'direct'
+    });
+
+    // Redirect after a brief moment to ensure the event fires
+    setTimeout(function() {
+      window.location.href = 'https://www.linkedin.com/in/steven-pinto-3714985';
+    }, 300);
+  </script>
+</head>
+<body>
+  <p style="font-family:sans-serif;text-align:center;margin-top:80px;color:#64748b;">
+    Redirecting to LinkedIn...
+  </p>
+</body>
+</html>

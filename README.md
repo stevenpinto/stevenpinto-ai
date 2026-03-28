@@ -11,13 +11,18 @@ Personal portfolio site for Steven Pinto. Static HTML/CSS/JS — no build step, 
 
 ```
 index.html              Main single-page site
-linkedin.html           LinkedIn redirect (tracks clicks via GA4)
+linkedin/index.html     LinkedIn redirect (tracks clicks via GA4)
 admin.html              Ask Steve AI feedback admin (not public)
 favicon.ico             Site favicon
 css/style.css           All styles (dark/light theme)
+css/lab-article.css     Styles for lab article pages
 js/main.js              Animations, scroll, theme toggle, nav
 js/steve-ai-widget.js   Ask Steve AI chatbot widget
 images/                 Project screenshots and profile photo
+lab/                    "In the Lab" article pages
+  knowledge-base/       Local RAG Knowledge Base article
+  robotic-pruner/       AI Robotic Pruner article
+  halobar-hardware/     HaloBar Hardware Build article
 .github/workflows/      GitHub Actions deploy pipeline
 ```
 
@@ -46,8 +51,8 @@ The IAM role needs:
 
 | Tool | Purpose | Setup |
 |------|---------|-------|
-| **GA4** (`G-3H5ZRCRHN2`) | Page views, referrers, UTM tracking | Configured in `index.html` and `linkedin.html` |
-| **Microsoft Clarity** (`w2y8zv15h3`) | Session recordings, heatmaps | Configured in `index.html` |
+| **GA4** (`G-3H5ZRCRHN2`) | Page views, referrers, UTM tracking | Configured in `index.html`, `linkedin/index.html`, and all lab pages |
+| **Microsoft Clarity** (`w2y8zv15h3`) | Session recordings, heatmaps | Configured in `index.html` and all lab pages |
 | **LinkedIn Redirect** | Track resume-to-LinkedIn clicks | Link to `stevenpinto.com/linkedin` on resumes |
 
 ### UTM Tracking
@@ -56,13 +61,15 @@ Use UTM-tagged URLs to track where traffic comes from in GA4:
 
 | Use Case | URL |
 |----------|-----|
-| Resume link to site | `https://stevenpinto.com/?utm_source=companyname&utm_medium=resume` |
-| Resume link to LinkedIn | `https://stevenpinto.com/linkedin?utm_source=companyname&utm_medium=resume` |
-| LinkedIn article | `https://stevenpinto.com/?utm_source=linkedin&utm_medium=social&utm_campaign=article-name` |
+| Resume link to site | `?utm_source=companyname&utm_medium=resume` |
+| Resume link to LinkedIn | `/linkedin/index.html?utm_source=companyname&utm_medium=resume` |
+| LinkedIn post | `?utm_source=linkedin&utm_medium=social&utm_campaign=article-name` |
+| Reddit post | `?utm_source=reddit&utm_medium=social&utm_campaign=article-name&utm_content=r-subreddit` |
 
 - `utm_source` — who sent the traffic (company name or platform)
 - `utm_medium` — channel type (`resume` or `social`)
-- `utm_campaign` — specific article or campaign name
+- `utm_campaign` — article or content name
+- `utm_content` — optional, specific placement (subreddit, post vs comment, etc.)
 
 ## Adding/Updating Project Screenshots
 

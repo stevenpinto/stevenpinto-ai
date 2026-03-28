@@ -42,16 +42,16 @@ Web component chatbot powered by a serverless RAG pipeline:
 Three tracking tools are integrated in `index.html`:
 
 ### Google Analytics 4
-- Measurement ID: `G-3H5ZRCRHN2` (configured in both `index.html` and `linkedin.html`)
+- Measurement ID: `G-3H5ZRCRHN2` (configured in `index.html`, `linkedin/index.html`, and all lab article pages)
 - Tracks: page views, referrers, location, device, session duration, UTM parameters
 
 ### Microsoft Clarity
-- Project ID: `w2y8zv15h3` (configured in `index.html`)
+- Project ID: `w2y8zv15h3` (configured in `index.html` and all lab article pages)
 - Provides: session recordings and heatmaps (free, no traffic limits)
 
 ### LinkedIn Redirect (`/linkedin`)
 - Resume links to `https://stevenpinto.com/linkedin` instead of LinkedIn directly
-- `linkedin.html` fires a `linkedin_redirect` GA4 event then redirects to LinkedIn profile
+- `linkedin/index.html` fires a `linkedin_redirect` GA4 event then redirects to LinkedIn profile
 - Tracks which resume submissions result in LinkedIn profile views
 
 ### Mailtrack
@@ -59,12 +59,20 @@ Three tracking tools are integrated in `index.html`:
 - Tracks when emailed resumes/messages are opened and how many times
 - No code changes needed
 
-## UTM Tracking for Resumes
-Use UTM-tagged URLs per company when emailing your resume:
+## UTM Tracking
+UTM parameters used across all links:
+- `utm_source` — who sent the traffic (company name or platform like `linkedin`, `reddit`)
+- `utm_medium` — channel type (`resume` or `social`)
+- `utm_campaign` — article or content name (e.g., `halobar-hardware`, `knowledge-base`)
+- `utm_content` — optional, specific placement (e.g., `r-homelab`, `r-cocktails`)
+
+Examples:
 ```
-https://stevenpinto.com/?utm_source=greenbox&utm_medium=resume
+https://stevenpinto.com/?utm_source=companyname&utm_medium=resume
+https://stevenpinto.com/linkedin/index.html?utm_source=companyname&utm_medium=resume
+https://stevenpinto.com/lab/halobar-hardware/index.html?utm_source=linkedin&utm_medium=social&utm_campaign=halobar-hardware
+https://stevenpinto.com/lab/knowledge-base/index.html?utm_source=reddit&utm_medium=social&utm_campaign=knowledge-base&utm_content=r-homelab
 ```
-GA4 will attribute that visit to the specific company. Use a unique `utm_source` per employer.
 
 ## In the Lab Section
 Articles about projects Steve is exploring or actively building. Each article lives at `lab/{slug}/index.html`.

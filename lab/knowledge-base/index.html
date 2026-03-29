@@ -3,8 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local RAG Knowledge Base — Steven Pinto</title>
+  <title>Local RAG Knowledge Base | Steven Pinto</title>
   <meta name="description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://stevenpinto.com/lab/knowledge-base/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://stevenpinto.com/lab/knowledge-base/">
+  <meta property="og:title" content="Local RAG Knowledge Base | Steven Pinto">
+  <meta property="og:description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <meta property="og:image" content="https://stevenpinto.com/images/steve.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Local RAG Knowledge Base | Steven Pinto">
+  <meta name="twitter:description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <meta name="twitter:image" content="https://stevenpinto.com/images/steve.jpg">
+
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/lab-article.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -58,13 +72,13 @@
       <div class="lab-article-body">
         <h2>The Idea</h2>
 <p>
-I wanted something that felt like ChatGPT, but for my own data—and without sending anything to the cloud. 
+I wanted something that felt like ChatGPT, but for my own data, without sending anything to the cloud.
 I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be. 
 Search works when you know what you're looking for. It falls apart when you don’t.
 </p>
 
 <p>
-The idea here is simple: take everything I care about—documents, notes, configs, random files, eventually email and shared drives—and make it searchable through natural language. 
+The idea here is simple: take everything I care about (documents, notes, configs, random files, eventually email and shared drives) and make it searchable through natural language.
 Ask a question, get an answer, and know where that answer came from.
 </p>
 
@@ -74,7 +88,7 @@ This system is meant to run entirely local. No usage limits. No surprises.
 </p>
 
 <p>
-At a higher level, this is less about building a tool and more about learning how modern AI systems actually work under the hood—especially the kind companies are starting to deploy internally.
+At a higher level, this is less about building a tool and more about learning how modern AI systems actually work under the hood, especially the kind companies are starting to deploy internally.
 </p>
 
 
@@ -83,18 +97,18 @@ At a higher level, this is less about building a tool and more about learning ho
   <div class="lab-spec-card">
     <h3>Core Stack</h3>
     <ul>
-      <li><strong>Ollama</strong> — local LLM inference</li>
-      <li><strong>AnythingLLM</strong> — RAG pipeline + UI</li>
-      <li><strong>Docker</strong> — container orchestration</li>
-      <li><strong>Ubuntu Server</strong> — host OS</li>
+      <li><strong><a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a></strong>: local LLM inference</li>
+      <li><strong><a href="https://anythingllm.com" target="_blank" rel="noopener">AnythingLLM</a></strong>: RAG pipeline + UI</li>
+      <li><strong><a href="https://www.docker.com" target="_blank" rel="noopener">Docker</a></strong>: container orchestration</li>
+      <li><strong>Ubuntu Server</strong>: host OS</li>
     </ul>
   </div>
   <div class="lab-spec-card">
     <h3>Hardware</h3>
     <ul>
-      <li><strong>RTX 3070</strong> — primary inference GPU</li>
-      <li><strong>64GB ECC RAM</strong> — memory for embeddings + vector DB</li>
-      <li><strong>NVMe storage</strong> — fast retrieval + indexing</li>
+      <li><strong>RTX 3070</strong>: primary inference GPU</li>
+      <li><strong>64GB ECC RAM</strong>: memory for embeddings + vector DB</li>
+      <li><strong>NVMe storage</strong>: fast retrieval + indexing</li>
     </ul>
   </div>
 </div>
@@ -118,7 +132,7 @@ Hardware-wise, I’m using a repurposed server with 64GB of RAM and an RTX 3070 
 
 <p>
 I’m being intentional about what gets indexed. I’m not trying to dump an entire filesystem into a vector database and hope for the best. 
-Instead, I’m starting with curated data—documents that actually matter—and expanding from there.
+Instead, I’m starting with curated data (documents that actually matter) and expanding from there.
 </p>
 
 <p>
@@ -133,7 +147,7 @@ The plan is to layer this out over time:
 </ul>
 
 <p>
-Longer term, this is also about portability. I want something that can evolve from a home lab into something I could realistically stand up inside a company—on hardware we already own.
+Longer term, this is also about portability. I want something that can evolve from a home lab into something I could realistically stand up inside a company, on hardware we already own.
 </p>
 
 
@@ -156,7 +170,7 @@ A smaller model with good context consistently beats a larger model with bad dat
 </p>
 
 <p>
-I’m also paying attention to performance. Local systems don’t have token limits, but they do have real constraints—GPU memory, disk speed, and indexing time. 
+I’m also paying attention to performance. Local systems don’t have token limits, but they do have real constraints: GPU memory, disk speed, and indexing time.
 So part of this is figuring out what actually scales and what just looks good on paper.
 </p>
 

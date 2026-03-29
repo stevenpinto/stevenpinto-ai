@@ -3,8 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Robotic Pruner — Steven Pinto</title>
+  <title>AI Robotic Pruner | Steven Pinto</title>
   <meta name="description" content="An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="canonical" href="https://stevenpinto.com/lab/robotic-pruner/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://stevenpinto.com/lab/robotic-pruner/">
+  <meta property="og:title" content="AI Robotic Pruner | Steven Pinto">
+  <meta property="og:description" content="An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.">
+  <meta property="og:image" content="https://stevenpinto.com/images/steve.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Robotic Pruner | Steven Pinto">
+  <meta name="twitter:description" content="An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.">
+  <meta name="twitter:image" content="https://stevenpinto.com/images/steve.jpg">
+
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="stylesheet" href="../../css/lab-article.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -70,10 +84,10 @@ Back around 2020, I started thinking about building a robotic arm that could ide
 </p>
 
 <ul>
-  <li><strong>TensorFlow</strong> for training models</li>
-  <li><strong>OpenCV</strong> for image processing</li>
-  <li><strong>PlantCV</strong> for plant-specific analysis</li>
-  <li><strong>Unity</strong> for simulation</li>
+  <li><strong><a href="https://www.tensorflow.org" target="_blank" rel="noopener">TensorFlow</a></strong> for training models</li>
+  <li><strong><a href="https://opencv.org" target="_blank" rel="noopener">OpenCV</a></strong> for image processing</li>
+  <li><strong><a href="https://plantcv.readthedocs.io" target="_blank" rel="noopener">PlantCV</a></strong> for plant-specific analysis</li>
+  <li><strong><a href="https://unity.com" target="_blank" rel="noopener">Unity</a></strong> for simulation</li>
 </ul>
 
 <p>
@@ -94,27 +108,27 @@ Today, I'd build this as a robotics problem first, not just a vision problem.
   <div class="lab-spec-card">
     <h3>Software</h3>
     <ul>
-      <li><strong>ROS 2 + MoveIt 2</strong> — motion planning + control</li>
-      <li><strong>PyTorch</strong> — segmentation model for plant structures</li>
-      <li><strong>OpenCV</strong> — calibration, geometry, cleanup</li>
-      <li><strong>NVIDIA Isaac Sim</strong> — simulation + testing</li>
-      <li><strong>ONNX Runtime</strong> — edge model deployment</li>
+      <li><strong><a href="https://ros.org" target="_blank" rel="noopener">ROS 2</a> + MoveIt 2</strong>: motion planning + control</li>
+      <li><strong><a href="https://pytorch.org" target="_blank" rel="noopener">PyTorch</a></strong>: segmentation model for plant structures</li>
+      <li><strong><a href="https://opencv.org" target="_blank" rel="noopener">OpenCV</a></strong>: calibration, geometry, cleanup</li>
+      <li><strong><a href="https://developer.nvidia.com/isaac-sim" target="_blank" rel="noopener">NVIDIA Isaac Sim</a></strong>: simulation + testing</li>
+      <li><strong><a href="https://onnxruntime.ai" target="_blank" rel="noopener">ONNX Runtime</a></strong>: edge model deployment</li>
     </ul>
   </div>
   <div class="lab-spec-card">
     <h3>Hardware</h3>
     <ul>
-      <li><strong>Robotic arm</strong> — 6-DOF for reach + precision</li>
-      <li><strong>Depth cameras</strong> — real 3D positioning</li>
-      <li><strong>Servo-driven scissors</strong> — cutting mechanism</li>
-      <li><strong>NVIDIA Jetson</strong> — edge compute</li>
+      <li><strong>Robotic arm</strong>: 6-DOF for reach + precision</li>
+      <li><strong>Depth cameras</strong>: real 3D positioning</li>
+      <li><strong>Servo-driven scissors</strong>: cutting mechanism</li>
+      <li><strong><a href="https://www.nvidia.com/en-us/autonomous-machines/embedded-computing" target="_blank" rel="noopener">NVIDIA Jetson</a></strong>: edge compute</li>
     </ul>
   </div>
 </div>
 <BR>
 
 <p>
-PlantCV is still interesting, but I'd treat it as optional—more of a helper for plant structure analysis instead of the core of the system.
+<a href="https://plantcv.readthedocs.io" target="_blank" rel="noopener">PlantCV</a> is still interesting, but I'd treat it as optional. More of a helper for plant structure analysis instead of the core of the system.
 </p>
 
 <p>

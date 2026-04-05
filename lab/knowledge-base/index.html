@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Local RAG Knowledge Base | Steven Pinto</title>
-  <meta name="description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <title>Mnemon: Local RAG Server | Steven Pinto</title>
+  <meta name="description" content="How I built Mnemon, a self-hosted AI inference and RAG server using Ollama, AnythingLLM, and an RTX 3070. Fully local, no API costs, complete data privacy.">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="canonical" href="https://stevenpinto.com/lab/knowledge-base/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://stevenpinto.com/lab/knowledge-base/">
-  <meta property="og:title" content="Local RAG Knowledge Base | Steven Pinto">
-  <meta property="og:description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <meta property="og:title" content="Mnemon: Local RAG Server | Steven Pinto">
+  <meta property="og:description" content="How I built Mnemon, a self-hosted AI inference and RAG server using Ollama, AnythingLLM, and an RTX 3070. Fully local, no API costs, complete data privacy.">
   <meta property="og:image" content="https://stevenpinto.com/images/steve.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Local RAG Knowledge Base | Steven Pinto">
-  <meta name="twitter:description" content="Building a self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.">
+  <meta name="twitter:title" content="Mnemon: Local RAG Server | Steven Pinto">
+  <meta name="twitter:description" content="How I built Mnemon, a self-hosted AI inference and RAG server using Ollama, AnythingLLM, and an RTX 3070. Fully local, no API costs, complete data privacy.">
   <meta name="twitter:image" content="https://stevenpinto.com/images/steve.jpg">
 
   <link rel="stylesheet" href="../../css/style.css">
@@ -61,161 +61,94 @@
   <article class="lab-article">
     <div class="container">
       <div class="lab-article-header">
-        <span class="lab-status lab-status-planning">Planning</span>
-        <h1>Local RAG Knowledge Base</h1>
-        <p class="lab-article-subtitle">A self-hosted AI knowledge base using Ollama and AnythingLLM for private, local document retrieval and chat.</p>
+        <span class="lab-status lab-status-complete">Complete</span>
+        <h1>Mnemon: Local RAG Server</h1>
+        <p class="lab-article-subtitle">A self-hosted AI inference and RAG server running entirely on local hardware. No API costs, no data leaving the network, no rate limits.</p>
         <div class="project-tech">
-          <span>Ollama</span><span>AnythingLLM</span><span>RAG</span><span>LLM</span>
+          <span>Ollama</span><span>AnythingLLM</span><span>Docker</span><span>RAG</span><span>Ubuntu</span><span>NVIDIA CUDA</span>
         </div>
       </div>
 
-      <div class="lab-article-body">
+      <div class=”lab-article-body”>
         <h2>The Idea</h2>
 <p>
 I wanted something that felt like ChatGPT, but for my own data, without sending anything to the cloud.
-I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be. 
-Search works when you know what you're looking for. It falls apart when you don’t.
+I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be.
+Search works when you know what you’re looking for. It falls apart when you don’t.
 </p>
 
 <p>
-The idea here is simple: take everything I care about (documents, notes, configs, random files, eventually email and shared drives) and make it searchable through natural language.
-Ask a question, get an answer, and know where that answer came from.
+The goal was simple: take everything I care about (documents, notes, configs, articles) and make it searchable through natural language. Ask a question, get an answer, and know where it came from.
+No API costs, no rate limits, no data leaving the network.
 </p>
 
 <p>
-I also wanted to remove the dependency on tokens and external APIs. Not because they’re bad, but because they come with tradeoffs: cost, latency, and most importantly, data leaving your environment. 
-This system is meant to run entirely local. No usage limits. No surprises.
+I called it Mnemon, a nod to memory and recall. Fitting for a system whose whole job is to remember things so I don’t have to.
 </p>
-
-<p>
-At a higher level, this is less about building a tool and more about learning how modern AI systems actually work under the hood, especially the kind companies are starting to deploy internally.
-</p>
-
 
 <h2>The Stack</h2>
-<div class="lab-spec-grid">
-  <div class="lab-spec-card">
+<div class=”lab-spec-grid”>
+  <div class=”lab-spec-card”>
     <h3>Core Stack</h3>
     <ul>
-      <li><strong><a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a></strong>: local LLM inference</li>
-      <li><strong><a href="https://anythingllm.com" target="_blank" rel="noopener">AnythingLLM</a></strong>: RAG pipeline + UI</li>
-      <li><strong><a href="https://www.docker.com" target="_blank" rel="noopener">Docker</a></strong>: container orchestration</li>
-      <li><strong>Ubuntu Server</strong>: host OS</li>
+      <li><strong><a href=”https://ollama.com” target=”_blank” rel=”noopener”>Ollama</a></strong>: local LLM inference (systemd service, GPU-accelerated)</li>
+      <li><strong><a href=”https://anythingllm.com” target=”_blank” rel=”noopener”>AnythingLLM</a></strong>: RAG pipeline, document ingestion, chat UI</li>
+      <li><strong><a href=”https://www.docker.com” target=”_blank” rel=”noopener”>Docker</a></strong>: container for AnythingLLM with GPU passthrough</li>
+      <li><strong>LanceDB</strong>: built-in vector database (via AnythingLLM)</li>
+      <li><strong>Ubuntu 22.04 LTS</strong>: host OS</li>
     </ul>
   </div>
-  <div class="lab-spec-card">
+  <div class=”lab-spec-card”>
     <h3>Hardware</h3>
     <ul>
-      <li><strong>RTX 3070</strong>: primary inference GPU</li>
-      <li><strong>64GB ECC RAM</strong>: memory for embeddings + vector DB</li>
-      <li><strong>NVMe storage</strong>: fast retrieval + indexing</li>
+      <li><strong>RTX 3070 (8GB VRAM)</strong>: primary inference GPU</li>
+      <li><strong>64GB ECC RAM</strong>: memory for embeddings and model context</li>
+      <li><strong>447GB SSD</strong>: OS drive</li>
+      <li><strong>745GB SSD</strong>: dedicated AI data drive (/mnt/aidata)</li>
     </ul>
   </div>
 </div>
 <BR>
 
-<h2>Planning</h2>
-<p>
-I forced myself to keep this simple. It’s really easy to over-engineer this kind of project before you even know what’s useful.
-The first version is a single-node system:
-</p>
-
+<h2>Models Running</h2>
 <ul>
-  <li><strong>Ollama</strong> for running models locally</li>
-  <li><strong>AnythingLLM</strong> for ingestion, embeddings, and chat</li>
-  <li><strong>Docker on Ubuntu</strong> to keep everything contained and repeatable</li>
+  <li><strong>gemma4:e4b</strong>: primary chat model</li>
+  <li><strong>mistral:7b-instruct-q4_K_M</strong>: fallback chat model</li>
+  <li><strong>nomic-embed-text</strong>: embeddings for RAG retrieval</li>
 </ul>
 
+<h2>How It Works</h2>
 <p>
-Hardware-wise, I’m using a repurposed server with 64GB of RAM and an RTX 3070 for inference. It’s more than enough to get something real working without turning this into a science project.
+Ollama runs as a GPU-accelerated systemd service and exposes a local API on the network. AnythingLLM runs in Docker with GPU passthrough via the NVIDIA Container Toolkit. It connects to Ollama over the LAN IP (not localhost, which doesn’t reliably resolve inside Linux containers) and handles all document ingestion, chunking, embedding, and retrieval.
 </p>
 
 <p>
-I’m being intentional about what gets indexed. I’m not trying to dump an entire filesystem into a vector database and hope for the best. 
-Instead, I’m starting with curated data (documents that actually matter) and expanding from there.
+Model weights and all persistent data live on the dedicated AI drive, keeping AI workloads completely isolated from the OS. The AI data drive had to be owned by the Ollama system user, not my login user, which was one of the first things I had to sort out.
 </p>
 
-<p>
-The plan is to layer this out over time:
-</p>
-
+<h2>What It’s Used For</h2>
 <ul>
-  <li>Start with local files and a clean knowledge base</li>
-  <li>Add Synology and structured folders</li>
-  <li>Integrate Google Drive and Gmail with filtering</li>
-  <li>Eventually bring in system data and logs</li>
+  <li>Document Q&A: upload PDFs, notes, or articles and query them through chat</li>
+  <li>Home Assistant AI integration: Ollama as the local Assist backend, no cloud dependency</li>
+  <li>Frigate camera analysis: vision model generating descriptions for local surveillance events</li>
+  <li>General AI experimentation without API costs or rate limits</li>
 </ul>
 
-<p>
-Longer term, this is also about portability. I want something that can evolve from a home lab into something I could realistically stand up inside a company, on hardware we already own.
-</p>
-
-
-<h2>Execution</h2>
-<p>
-Right now, this is in the build phase.
-The initial focus is getting the core loop working end-to-end:
-</p>
-
+<h2>What I Learned</h2>
 <ul>
-  <li>Ingest documents</li>
-  <li>Chunk and embed them</li>
-  <li>Store them in a vector database</li>
-  <li>Query them through a local model</li>
+  <li><code>host.docker.internal</code> doesn’t reliably resolve inside Docker containers on Linux. Use the server’s LAN IP instead.</li>
+  <li>Set <code>OLLAMA_MODELS</code> before pulling models or they land on the OS drive instead of the data drive.</li>
+  <li>Ollama runs as its own system user. The data drive permissions need to match, not your login user.</li>
+  <li>Most of the value in RAG comes from the data pipeline, not the model. Good context beats a bigger model every time.</li>
 </ul>
-
-<p>
-That sounds straightforward, but the details matter. Chunking strategy, embedding quality, and filtering have a bigger impact on results than the model itself. 
-A smaller model with good context consistently beats a larger model with bad data.
-</p>
-
-<p>
-I’m also paying attention to performance. Local systems don’t have token limits, but they do have real constraints: GPU memory, disk speed, and indexing time.
-So part of this is figuring out what actually scales and what just looks good on paper.
-</p>
-
-<p>
-The goal isn’t to make something flashy. It’s to make something I’d actually use. 
-If I can’t rely on it to answer real questions about my own data, it’s not done.
-</p>
-
-
-<h2>What I’m Learning</h2>
-<ul>
-  <li>Most of the value comes from the data pipeline, not the model</li>
-  <li>Indexing everything is worse than indexing the right things</li>
-  <li>RAG systems are only as good as their context quality</li>
-  <li>Local AI trades cost limits for infrastructure responsibility</li>
-  <li>Simple architectures are easier to evolve than “perfect” ones</li>
-</ul>
-
 
 <h2>What’s Next</h2>
 <ul>
-  <li>Improve ingestion with incremental updates instead of full re-indexing</li>
-  <li>Add better metadata and filtering for more accurate retrieval</li>
-  <li>Split data into logical workspaces (personal vs work)</li>
-  <li>Experiment with agents for multi-step workflows</li>
-  <li>Test a multi-node setup using spare server hardware</li>
+  <li>Add Synology NAS as a data source</li>
+  <li>Configure Google Drive connector</li>
+  <li>Set up NGINX reverse proxy with SSL for secure remote access</li>
+  <li>Evaluate Qdrant as an external vector DB for larger workloads</li>
 </ul>
-
-
-<h2>Why This Matters</h2>
-<p>
-This isn’t just a home lab project. It’s a way to understand how AI can actually be used inside an organization without handing data off to third parties.
-If this works the way I expect, the same pattern can be applied to:
-</p>
-
-<ul>
-  <li>internal documentation</li>
-  <li>support knowledge bases</li>
-  <li>operational data</li>
-  <li>institutional knowledge that usually gets lost over time</li>
-</ul>
-
-<p>
-The end goal is simple: make information easier to access, without adding more tools or complexity.
-</p>
       </div>
     </div>
   </article>

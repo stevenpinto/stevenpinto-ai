@@ -61,7 +61,7 @@
   <article class="lab-article">
     <div class="container">
       <div class="lab-article-header">
-        <span class="lab-status lab-status-complete">Complete</span>
+        <span class="lab-status lab-status-active">Active</span>
         <h1>Mnemon: Local RAG Server</h1>
         <p class="lab-article-subtitle">A self-hosted AI inference and RAG server running entirely on local hardware. No API costs, no data leaving the network, no rate limits.</p>
         <div class="project-tech">
@@ -69,93 +69,95 @@
         </div>
       </div>
 
-      <div class=”lab-article-body”>
+      <div class="lab-article-body">
 
         <h2>The Idea</h2>
-<p>
-I wanted something that felt like ChatGPT, but for my own data, without sending anything to the cloud. I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be.
-</p>
+        <p>
+I've spent years building and documenting things, but finding that information later always felt harder than it should be. Searching through old notes, digging through config files, trying to remember which doc had the answer. It adds up.
+        </p>
 
-<p>
-The goal was simple: take everything I care about (documents, notes, configs, articles) and make it searchable through natural language. Ask a question, get an answer, and know where it came from. No API costs, no rate limits, no data leaving the network.
-</p>
+        <p>
+The goal was simple: take everything I care about, documents, notes, configs, articles, and make it searchable through natural language. Ask a question, get an answer with a source. No API costs, no rate limits, no data leaving the network.
+        </p>
 
-<p>
-I called it Mnemon, a nod to memory and recall. Fitting for a system whose whole job is to remember things so I don’t have to.
-</p>
-
+        <p>
+I called it Mnemon, a nod to memory and recall. It runs completely on local hardware, and everything stays on-premises.
+        </p>
 
         <h2>The Stack</h2>
-<div class=”lab-spec-grid”>
-  <div class=”lab-spec-card”>
-    <h3>Core Stack</h3>
-    <ul>
-      <li><strong><a href=”https://ollama.com” target=”_blank” rel=”noopener”>Ollama</a></strong>: local LLM inference, GPU-accelerated systemd service</li>
-      <li><strong><a href=”https://anythingllm.com” target=”_blank” rel=”noopener”>AnythingLLM</a></strong>: RAG pipeline, document ingestion, chat UI</li>
-      <li><strong><a href=”https://www.docker.com” target=”_blank” rel=”noopener”>Docker</a></strong>: container for AnythingLLM with GPU passthrough</li>
-      <li><strong>LanceDB</strong>: built-in vector database via AnythingLLM</li>
-      <li><strong>Ubuntu 22.04 LTS</strong>: host OS</li>
-    </ul>
-  </div>
-  <div class=”lab-spec-card”>
-    <h3>Hardware</h3>
-    <ul>
-      <li><strong>RTX 3070 (8GB VRAM)</strong>: primary inference GPU</li>
-      <li><strong>64GB ECC RAM</strong>: memory for embeddings and model context</li>
-      <li><strong>447GB SSD</strong>: OS drive</li>
-      <li><strong>745GB SSD</strong>: dedicated AI data drive (/mnt/aidata)</li>
-    </ul>
-  </div>
-</div>
-<BR>
+        <div class="lab-spec-grid">
+          <div class="lab-spec-card">
+            <h3>Core Stack</h3>
+            <ul>
+              <li><strong><a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a></strong>: local LLM inference, GPU-accelerated systemd service</li>
+              <li><strong><a href="https://anythingllm.com" target="_blank" rel="noopener">AnythingLLM</a></strong>: RAG pipeline, document ingestion, chat UI</li>
+              <li><strong><a href="https://www.docker.com" target="_blank" rel="noopener">Docker</a></strong>: container for AnythingLLM with GPU passthrough</li>
+              <li><strong>LanceDB</strong>: built-in vector database via AnythingLLM</li>
+              <li><strong>Ubuntu 22.04 LTS</strong>: host OS</li>
+            </ul>
+          </div>
+          <div class="lab-spec-card">
+            <h3>Hardware</h3>
+            <ul>
+              <li><strong>RTX 3070 (8GB VRAM)</strong>: primary inference GPU</li>
+              <li><strong>92GB ECC RAM</strong>: memory for embeddings and model context</li>
+              <li><strong>447GB SSD</strong>: OS drive</li>
+              <li><strong>745GB SSD</strong>: dedicated AI data drive (/mnt/aidata)</li>
+            </ul>
+          </div>
+        </div>
+        <BR>
 
-        <h2>Models Running</h2>
-<ul>
-  <li><strong>gemma4:e4b</strong>: primary chat model</li>
-  <li><strong>mistral:7b-instruct-q4_K_M</strong>: fallback chat model</li>
-  <li><strong>nomic-embed-text</strong>: embeddings for RAG retrieval</li>
-</ul>
+        <h2>How I Set It Up</h2>
+        <p>
+The setup came together in a few stages. Getting each piece working independently before connecting them made the whole process much smoother.
+        </p>
+        <ul>
+          <li><strong>1. OS and storage.</strong> Installed Ubuntu 22.04 and mounted the dedicated AI data drive at /mnt/aidata to keep model weights and all persistent data off the OS drive.</li>
+          <li><strong>2. Ollama.</strong> Installed Ollama as a systemd service, set the OLLAMA_MODELS environment variable to point at the data drive before pulling any models, then pulled the chat and embedding models.</li>
+          <li><strong>3. GPU passthrough.</strong> Installed the NVIDIA Container Toolkit so Docker containers could access the GPU for accelerated inference.</li>
+          <li><strong>4. AnythingLLM.</strong> Deployed AnythingLLM in Docker, configured it to connect to Ollama using the server's LAN IP. Using localhost or host.docker.internal doesn't reliably resolve inside Linux containers.</li>
+          <li><strong>5. First documents.</strong> Ingested a few PDFs and notes, ran test queries, confirmed the pipeline was returning grounded answers with source citations.</li>
+        </ul>
 
+        <h2>What It's Running</h2>
+        <p>
+Ollama handles all inference and exposes a local API on the network. The primary chat model is <strong>gemma4:e4b</strong> for general Q&A, with <strong>mistral:7b-instruct-q4_K_M</strong> as a fallback when I want to compare outputs or need a second pass. For vision work, <strong>llava</strong> handles image analysis for Frigate and Home Assistant. <strong>nomic-embed-text</strong> handles all embeddings for RAG retrieval.
+        </p>
 
-        <h2>How It Works</h2>
-<p>
-Ollama runs as a GPU-accelerated systemd service and exposes a local API on the network. AnythingLLM runs in Docker with GPU passthrough via the NVIDIA Container Toolkit.
-</p>
+        <p>
+All model weights live on the dedicated AI drive. The GPU is passed through to Docker via the NVIDIA Container Toolkit so AnythingLLM can run inference without the overhead of CPU-only processing.
+        </p>
 
-<p>
-It connects to Ollama over the LAN IP rather than localhost, which doesn’t reliably resolve inside Linux containers. AnythingLLM handles all document ingestion, chunking, embedding, and retrieval from there.
-</p>
+        <h2>What It Actually Does</h2>
+        <p>
+Day to day, the most useful thing is document Q&A. I upload PDFs, notes, or exported articles and query them through chat. AnythingLLM cites its sources, so I can see exactly which chunk it pulled the answer from.
+        </p>
 
-<p>
-Model weights and all persistent data live on the dedicated AI drive, keeping workloads completely isolated from the OS.
-</p>
-
-
-        <h2>What It’s Used For</h2>
-<ul>
-  <li>Document Q&A: upload PDFs, notes, or articles and query them through chat</li>
-  <li>Home Assistant AI integration: Ollama as the local Assist backend, no cloud dependency</li>
-  <li>Frigate camera analysis: vision model generating descriptions for local surveillance events</li>
-  <li>General AI experimentation without API costs or rate limits</li>
-</ul>
-
+        <p>
+It also runs as the local AI backend for Home Assistant, replacing any cloud dependency for voice assist. Frigate uses llava to generate descriptions of surveillance events locally, so nothing leaves the network. And when I want to experiment with a new model or pipeline idea, I don't have to worry about API costs or rate limits.
+        </p>
 
         <h2>What I Learned</h2>
-<ul>
-  <li><strong>host.docker.internal doesn’t work on Linux.</strong> Use the server’s LAN IP inside Docker containers instead.</li>
-  <li><strong>Set OLLAMA_MODELS before pulling models.</strong> If you don’t, they land on the OS drive, not the data drive.</li>
-  <li><strong>Ollama runs as its own system user.</strong> The data drive permissions have to match that user, not your login.</li>
-  <li><strong>The data pipeline matters more than the model.</strong> Good context beats a bigger model with bad data every time.</li>
-</ul>
+        <p>
+The data pipeline matters more than the model. I spent time trying different LLMs before realizing that well-structured, clean source documents made a bigger difference than which model was doing the answering. Good context beats a bigger model with bad data every time.
+        </p>
 
+        <p>
+A few setup details that aren't obvious. Ollama runs as its own system user, so the AI data drive permissions need to match that user, not your login user. The OLLAMA_MODELS environment variable has to be set before pulling any models or they land on the OS drive by default. And inside Docker on Linux, you need the server's actual LAN IP, not a hostname alias.
+        </p>
 
-        <h2>What’s Next</h2>
-<ul>
-  <li>Add Synology NAS as a data source</li>
-  <li>Configure Google Drive connector</li>
-  <li>Set up NGINX reverse proxy with SSL for secure remote access</li>
-  <li>Evaluate Qdrant as an external vector DB for larger workloads</li>
-</ul>
+        <h2>What's Next</h2>
+        <ul>
+          <li>Add Synology NAS as a data source</li>
+          <li>Configure Google Drive connector</li>
+          <li>Set up NGINX reverse proxy with SSL for secure remote access</li>
+          <li>Evaluate Qdrant as an external vector DB for larger workloads</li>
+        </ul>
+
+        <div class="lab-article-footer">
+          <a href="../../#lab">&larr; Back</a>
+        </div>
       </div>
     </div>
   </article>

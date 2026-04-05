@@ -83,6 +83,8 @@ Current lab articles:
 3. **HaloBar Hardware Build** (`lab/halobar-hardware/`) — Physical automated bartender
 
 ### Lab Article Format
+**CRITICAL: All tags inside `.lab-article-body` must be indented with 8 spaces (matching the div itself). Never mix indentation levels. All `<h2>`, `<p>`, `<ul>`, `<div>` elements must start at the same column. Content inside `<p>` tags goes on its own line.**
+
 Each article page follows this consistent structure:
 - **Head:** Links to `../../css/style.css` and `../../css/lab-article.css`, plus GA4 and Clarity tracking scripts
 - **Nav:** SP logo linking to `../../`, single nav link: `← Back` linking to `../../#lab`
@@ -96,6 +98,17 @@ Each article page follows this consistent structure:
   - **What's Next** — Bulleted list of upcoming work
   - **Footer:** `lab-article-footer` div with `← Back` link to `../../#lab`
 - **Scripts:** Ask Steve AI widget (`../../js/steve-ai-widget.js` + `<steve-ai-widget>` element), then `../../js/main.js`
+
+### HTML Encoding Warning
+**CRITICAL: Always use straight ASCII double quotes (`"`) for all HTML attributes. Never use curly/smart quotes (`"` `"`) — they break attribute parsing and CSS stops applying entirely.** This has caused major styling issues (e.g., `class="lab-article-body"` with curly quotes meant the class was never recognized by the browser). If styling looks completely broken on a page, run this check first:
+```bash
+cat -A lab/{slug}/index.html | grep "M-b"
+```
+If any lines appear, the file has smart quotes. Fix with:
+```bash
+sed -i 's/\xe2\x80\x9c/"/g; s/\xe2\x80\x9d/"/g; s/\xe2\x80\x98/'"'"'/g; s/\xe2\x80\x99/'"'"'/g' lab/{slug}/index.html
+```
+Smart quotes typically get introduced when pasting content from word processors, Google Docs, or AI chat interfaces.
 
 ### Writing Style for Articles
 - Write in first person, conversational tone

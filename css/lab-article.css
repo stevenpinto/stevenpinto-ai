@@ -48,7 +48,12 @@
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--accent);
+  margin-top: 48px;
   margin-bottom: 24px;
+}
+
+.lab-article-body h2:first-child {
+  margin-top: 0;
 }
 
 .lab-article-body p {

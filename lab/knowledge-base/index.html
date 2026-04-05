@@ -70,31 +70,25 @@
       </div>
 
       <div class=”lab-article-body”>
+
         <h2>The Idea</h2>
-<p>
-I wanted something that felt like ChatGPT, but for my own data, without sending anything to the cloud.
-I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be.
-Search works when you know what you’re looking for. It falls apart when you don’t.
-</p>
 
-<p>
-The goal was simple: take everything I care about (documents, notes, configs, articles) and make it searchable through natural language. Ask a question, get an answer, and know where it came from.
-No API costs, no rate limits, no data leaving the network.
-</p>
+<p>I wanted something that felt like ChatGPT, but for my own data, without sending anything to the cloud. I’ve spent years building systems and documenting things, but finding that information later is always harder than it should be.</p>
 
-<p>
-I called it Mnemon, a nod to memory and recall. Fitting for a system whose whole job is to remember things so I don’t have to.
-</p>
+<p>The goal was simple: take everything I care about (documents, notes, configs, articles) and make it searchable through natural language. Ask a question, get an answer, and know where it came from. No API costs, no rate limits, no data leaving the network.</p>
 
-<h2>The Stack</h2>
+<p>I called it Mnemon, a nod to memory and recall. Fitting for a system whose whole job is to remember things so I don’t have to.</p>
+
+
+        <h2>The Stack</h2>
 <div class=”lab-spec-grid”>
   <div class=”lab-spec-card”>
     <h3>Core Stack</h3>
     <ul>
-      <li><strong><a href=”https://ollama.com” target=”_blank” rel=”noopener”>Ollama</a></strong>: local LLM inference (systemd service, GPU-accelerated)</li>
+      <li><strong><a href=”https://ollama.com” target=”_blank” rel=”noopener”>Ollama</a></strong>: local LLM inference, GPU-accelerated systemd service</li>
       <li><strong><a href=”https://anythingllm.com” target=”_blank” rel=”noopener”>AnythingLLM</a></strong>: RAG pipeline, document ingestion, chat UI</li>
       <li><strong><a href=”https://www.docker.com” target=”_blank” rel=”noopener”>Docker</a></strong>: container for AnythingLLM with GPU passthrough</li>
-      <li><strong>LanceDB</strong>: built-in vector database (via AnythingLLM)</li>
+      <li><strong>LanceDB</strong>: built-in vector database via AnythingLLM</li>
       <li><strong>Ubuntu 22.04 LTS</strong>: host OS</li>
     </ul>
   </div>
@@ -110,23 +104,26 @@ I called it Mnemon, a nod to memory and recall. Fitting for a system whose whole
 </div>
 <BR>
 
-<h2>Models Running</h2>
+        <h2>Models Running</h2>
+
 <ul>
   <li><strong>gemma4:e4b</strong>: primary chat model</li>
   <li><strong>mistral:7b-instruct-q4_K_M</strong>: fallback chat model</li>
   <li><strong>nomic-embed-text</strong>: embeddings for RAG retrieval</li>
 </ul>
 
-<h2>How It Works</h2>
-<p>
-Ollama runs as a GPU-accelerated systemd service and exposes a local API on the network. AnythingLLM runs in Docker with GPU passthrough via the NVIDIA Container Toolkit. It connects to Ollama over the LAN IP (not localhost, which doesn’t reliably resolve inside Linux containers) and handles all document ingestion, chunking, embedding, and retrieval.
-</p>
 
-<p>
-Model weights and all persistent data live on the dedicated AI drive, keeping AI workloads completely isolated from the OS. The AI data drive had to be owned by the Ollama system user, not my login user, which was one of the first things I had to sort out.
-</p>
+        <h2>How It Works</h2>
 
-<h2>What It’s Used For</h2>
+<p>Ollama runs as a GPU-accelerated systemd service and exposes a local API on the network. AnythingLLM runs in Docker with GPU passthrough via the NVIDIA Container Toolkit.</p>
+
+<p>It connects to Ollama over the LAN IP rather than localhost, which doesn’t reliably resolve inside Linux containers. AnythingLLM handles all document ingestion, chunking, embedding, and retrieval from there.</p>
+
+<p>Model weights and all persistent data live on the dedicated AI drive, keeping workloads completely isolated from the OS.</p>
+
+
+        <h2>What It’s Used For</h2>
+
 <ul>
   <li>Document Q&A: upload PDFs, notes, or articles and query them through chat</li>
   <li>Home Assistant AI integration: Ollama as the local Assist backend, no cloud dependency</li>
@@ -134,15 +131,19 @@ Model weights and all persistent data live on the dedicated AI drive, keeping AI
   <li>General AI experimentation without API costs or rate limits</li>
 </ul>
 
-<h2>What I Learned</h2>
+
+        <h2>What I Learned</h2>
+
 <ul>
-  <li><code>host.docker.internal</code> doesn’t reliably resolve inside Docker containers on Linux. Use the server’s LAN IP instead.</li>
-  <li>Set <code>OLLAMA_MODELS</code> before pulling models or they land on the OS drive instead of the data drive.</li>
-  <li>Ollama runs as its own system user. The data drive permissions need to match, not your login user.</li>
-  <li>Most of the value in RAG comes from the data pipeline, not the model. Good context beats a bigger model every time.</li>
+  <li><strong>host.docker.internal doesn’t work on Linux.</strong> Use the server’s LAN IP inside Docker containers instead.</li>
+  <li><strong>Set OLLAMA_MODELS before pulling models.</strong> If you don’t, they land on the OS drive, not the data drive.</li>
+  <li><strong>Ollama runs as its own system user.</strong> The data drive permissions have to match that user, not your login.</li>
+  <li><strong>The data pipeline matters more than the model.</strong> Good context beats a bigger model with bad data every time.</li>
 </ul>
 
-<h2>What’s Next</h2>
+
+        <h2>What’s Next</h2>
+
 <ul>
   <li>Add Synology NAS as a data source</li>
   <li>Configure Google Drive connector</li>

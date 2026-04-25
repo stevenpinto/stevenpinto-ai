@@ -1,19 +1,25 @@
 const WIDGET_CSS = `:host {
-  --steve-primary: #2563eb;
-  --steve-primary-hover: #1d4ed8;
-  --steve-bg: #ffffff;
-  --steve-bg-secondary: #f8fafc;
-  --steve-text: #1e293b;
-  --steve-text-light: #64748b;
-  --steve-border: #e2e8f0;
-  --steve-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  --steve-radius: 16px;
-  --steve-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Design tokens — light theme defaults.
+     CSS custom properties inherit through Shadow DOM, so the parent page's
+     [data-theme="dark"] overrides flow in automatically. */
+  --paper: #f7f4ee;
+  --paper-2: #efeae0;
+  --ink: #14161a;
+  --ink-2: #4a4e57;
+  --ink-3: #8a8e97;
+  --rule-soft: rgba(20, 22, 26, 0.14);
+  --accent: #8a3a1a;
+  --sans: 'Inter', -apple-system, system-ui, sans-serif;
+  --serif: 'Fraunces', Georgia, serif;
 
-  font-family: var(--steve-font);
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+  font-family: var(--sans);
   font-size: 14px;
   line-height: 1.5;
-  color: var(--steve-text);
+  color: var(--ink);
 }
 
 * {
@@ -22,66 +28,57 @@ const WIDGET_CSS = `:host {
   padding: 0;
 }
 
-/* Floating toggle button */
+/* ── Toggle pill ────────────────────────────── */
+
 .steve-ai-toggle {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--steve-primary);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--sans);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s, box-shadow 0.2s;
-  z-index: 10000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  transition: background 0.15s, transform 0.15s;
+  white-space: nowrap;
 }
 
 .steve-ai-toggle:hover {
-  transform: scale(1.08);
-  box-shadow: 0 6px 28px rgba(37, 99, 235, 0.5);
+  background: var(--accent);
+  transform: translateY(-1px);
 }
 
-.steve-ai-toggle svg {
-  width: 28px;
-  height: 28px;
-  fill: white;
+.ask-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6ec36b;
+  box-shadow: 0 0 0 3px rgba(110, 195, 107, 0.25);
+  flex-shrink: 0;
 }
 
-.steve-ai-toggle .close-icon {
-  display: none;
-}
+/* ── Chat window ────────────────────────────── */
 
-.steve-ai-toggle.open .chat-icon {
-  display: none;
-}
-
-.steve-ai-toggle.open .close-icon {
-  display: block;
-}
-
-/* Chat window */
 .steve-ai-window {
-  position: fixed;
-  bottom: 100px;
-  right: 24px;
-  width: 400px;
-  max-width: calc(100vw - 48px);
-  height: 560px;
-  max-height: calc(100vh - 140px);
-  background: var(--steve-bg);
-  border-radius: var(--steve-radius);
-  box-shadow: var(--steve-shadow);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  width: min(380px, calc(100vw - 48px));
+  max-height: calc(100vh - 100px);
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--rule-soft);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   display: none;
   flex-direction: column;
   overflow: hidden;
-  z-index: 9999;
-  border: 1px solid var(--steve-border);
-  animation: steve-ai-slide-up 0.25s ease-out;
+  animation: steve-ai-slide-up 0.2s ease-out;
 }
 
 .steve-ai-window.open {
@@ -89,128 +86,133 @@ const WIDGET_CSS = `:host {
 }
 
 @keyframes steve-ai-slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Header */
+/* ── Header ─────────────────────────────────── */
+
 .steve-ai-header {
-  background: var(--steve-primary);
-  color: white;
-  padding: 16px 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.steve-ai-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 600;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--rule-soft);
   flex-shrink: 0;
 }
 
 .steve-ai-header-text h3 {
+  font-family: var(--serif);
+  font-weight: 500;
   font-size: 15px;
-  font-weight: 600;
+  color: var(--ink);
   margin: 0;
 }
 
 .steve-ai-header-text p {
-  font-size: 12px;
-  opacity: 0.85;
-  margin: 0;
+  font-size: 11px;
+  color: var(--ink-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 2px 0 0 0;
 }
 
-/* Messages area */
+.steve-ai-close {
+  font-size: 18px;
+  color: var(--ink-2);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.steve-ai-close:hover {
+  color: var(--ink);
+}
+
+/* ── Messages ───────────────────────────────── */
+
 .steve-ai-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: 320px;
 }
 
 .steve-ai-messages::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 .steve-ai-messages::-webkit-scrollbar-thumb {
-  background: var(--steve-border);
+  background: var(--rule-soft);
   border-radius: 2px;
 }
 
-/* Message bubbles */
 .steve-ai-msg {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 12px;
   font-size: 14px;
   line-height: 1.5;
   word-wrap: break-word;
 }
 
-.steve-ai-msg.bot {
-  background: var(--steve-bg-secondary);
-  color: var(--steve-text);
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
+.steve-ai-by {
+  font-size: 10px;
+  color: var(--ink-3);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.steve-ai-msg.user .steve-ai-by {
+  color: var(--accent);
 }
 
 /* Markdown content inside bot messages */
-.steve-ai-msg.bot p {
+.steve-ai-msg-content p {
   margin: 0 0 8px 0;
 }
 
-.steve-ai-msg.bot p:last-child {
+.steve-ai-msg-content p:last-child {
   margin-bottom: 0;
 }
 
-.steve-ai-msg.bot h3,
-.steve-ai-msg.bot h4 {
+.steve-ai-msg-content h3,
+.steve-ai-msg-content h4 {
   margin: 10px 0 4px 0;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--ink);
 }
 
-.steve-ai-msg.bot h3:first-child,
-.steve-ai-msg.bot h4:first-child {
+.steve-ai-msg-content h3:first-child,
+.steve-ai-msg-content h4:first-child {
   margin-top: 0;
 }
 
-.steve-ai-msg.bot ul {
+.steve-ai-msg-content ul {
   margin: 4px 0 8px 0;
   padding-left: 18px;
 }
 
-.steve-ai-msg.bot li {
+.steve-ai-msg-content li {
   margin-bottom: 2px;
 }
 
-.steve-ai-msg.bot code {
-  background: rgba(0, 0, 0, 0.06);
+.steve-ai-msg-content code {
+  background: var(--paper-2);
   padding: 1px 4px;
   border-radius: 3px;
   font-size: 13px;
 }
 
-.steve-ai-msg.bot pre {
-  background: #1e293b;
-  color: #e2e8f0;
+.steve-ai-msg-content pre {
+  background: var(--ink);
+  color: var(--paper);
   padding: 10px;
   border-radius: 6px;
   overflow-x: auto;
@@ -218,31 +220,57 @@ const WIDGET_CSS = `:host {
   margin: 6px 0;
 }
 
-.steve-ai-msg.bot pre code {
+.steve-ai-msg-content pre code {
   background: none;
   padding: 0;
   color: inherit;
 }
 
-.steve-ai-msg.bot strong {
+.steve-ai-msg-content strong {
   font-weight: 600;
 }
 
-.steve-ai-msg.bot a {
-  color: var(--steve-primary);
+.steve-ai-msg-content a {
+  color: var(--accent);
   text-decoration: underline;
   word-break: break-all;
 }
 
-.steve-ai-msg.bot a:hover {
-  color: var(--steve-primary-hover);
+.steve-ai-msg-content a:hover {
+  opacity: 0.75;
 }
 
-/* Feedback buttons */
+/* ── Typing indicator ───────────────────────── */
+
+.steve-ai-msg.typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.steve-ai-msg.typing span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  animation: steve-ai-bounce 1.4s ease-in-out infinite;
+}
+
+.steve-ai-msg.typing span:nth-child(2) { animation-delay: 0.2s; }
+.steve-ai-msg.typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes steve-ai-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-5px); }
+}
+
+/* ── Feedback ───────────────────────────────── */
+
 .steve-ai-feedback {
   margin-top: 8px;
   padding-top: 6px;
-  border-top: 1px solid var(--steve-border);
+  border-top: 1px solid var(--rule-soft);
 }
 
 .steve-ai-fb-row {
@@ -252,19 +280,19 @@ const WIDGET_CSS = `:host {
 
 .steve-ai-fb-btn {
   background: none;
-  border: 1px solid var(--steve-border);
+  border: 1px solid var(--rule-soft);
   border-radius: 6px;
   padding: 4px 8px;
   cursor: pointer;
-  color: var(--steve-text-light);
+  color: var(--ink-3);
   display: flex;
   align-items: center;
   transition: all 0.15s;
 }
 
 .steve-ai-fb-btn:hover {
-  border-color: var(--steve-text-light);
-  color: var(--steve-text);
+  border-color: var(--ink-2);
+  color: var(--ink);
 }
 
 .steve-ai-fb-btn.active[data-rating="up"] {
@@ -274,9 +302,9 @@ const WIDGET_CSS = `:host {
 }
 
 .steve-ai-fb-btn.active[data-rating="down"] {
-  border-color: #ef4444;
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.08);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(138, 58, 26, 0.08);
 }
 
 .steve-ai-fb-comment {
@@ -285,161 +313,114 @@ const WIDGET_CSS = `:host {
 
 .steve-ai-fb-input {
   width: 100%;
-  border: 1px solid var(--steve-border);
-  border-radius: 8px;
+  border: 1px solid var(--rule-soft);
+  border-radius: 6px;
   padding: 8px 10px;
   font-size: 12px;
-  font-family: var(--steve-font);
+  font-family: var(--sans);
+  background: var(--paper-2);
+  color: var(--ink);
   resize: none;
   outline: none;
   line-height: 1.4;
 }
 
 .steve-ai-fb-input:focus {
-  border-color: var(--steve-primary);
+  border-color: var(--ink-2);
 }
 
 .steve-ai-fb-submit {
   margin-top: 6px;
   padding: 5px 14px;
-  border-radius: 6px;
+  border-radius: 999px;
   border: none;
-  background: var(--steve-primary);
-  color: white;
+  background: var(--ink);
+  color: var(--paper);
   font-size: 12px;
+  font-family: var(--sans);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .steve-ai-fb-submit:hover {
-  background: var(--steve-primary-hover);
+  background: var(--accent);
 }
 
 .steve-ai-fb-thanks {
   font-size: 12px;
-  color: var(--steve-text-light);
+  color: var(--ink-3);
   font-style: italic;
 }
 
-.steve-ai-msg.user {
-  background: var(--steve-primary);
-  color: white;
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
+/* ── Input area ─────────────────────────────── */
 
-.steve-ai-msg.typing {
-  display: flex;
-  gap: 4px;
-  padding: 14px 18px;
-}
-
-.steve-ai-msg.typing span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--steve-text-light);
-  animation: steve-ai-bounce 1.4s ease-in-out infinite;
-}
-
-.steve-ai-msg.typing span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.steve-ai-msg.typing span:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes steve-ai-bounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
-}
-
-/* Input area */
 .steve-ai-input-area {
-  padding: 12px 16px;
-  border-top: 1px solid var(--steve-border);
   display: flex;
   gap: 8px;
+  border-top: 1px solid var(--rule-soft);
+  padding: 10px 12px;
+  background: var(--paper-2);
   align-items: flex-end;
   flex-shrink: 0;
 }
 
 .steve-ai-input {
   flex: 1;
-  border: 1px solid var(--steve-border);
-  border-radius: 12px;
-  padding: 10px 14px;
-  font-size: 14px;
-  font-family: var(--steve-font);
-  resize: none;
+  background: transparent;
+  border: none;
   outline: none;
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--ink);
+  resize: none;
   max-height: 100px;
   line-height: 1.4;
-  transition: border-color 0.15s;
-}
-
-.steve-ai-input:focus {
-  border-color: var(--steve-primary);
 }
 
 .steve-ai-input::placeholder {
-  color: var(--steve-text-light);
+  color: var(--ink-3);
 }
 
 .steve-ai-send {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--steve-primary);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  font-family: var(--sans);
+  background: none;
   border: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 0;
   flex-shrink: 0;
-  transition: background 0.15s;
+  transition: opacity 0.15s;
 }
 
 .steve-ai-send:hover {
-  background: var(--steve-primary-hover);
+  opacity: 0.7;
 }
 
 .steve-ai-send:disabled {
-  background: var(--steve-border);
+  color: var(--ink-3);
   cursor: not-allowed;
+  opacity: 1;
 }
 
-.steve-ai-send svg {
-  width: 18px;
-  height: 18px;
-  fill: white;
-}
+/* ── Mobile ─────────────────────────────────── */
 
-/* Powered by footer */
-.steve-ai-footer {
-  text-align: center;
-  padding: 6px;
-  font-size: 11px;
-  color: var(--steve-text-light);
-  flex-shrink: 0;
-}
-
-/* Mobile responsive */
 @media (max-width: 480px) {
-  .steve-ai-window {
-    bottom: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-    max-width: 100vw;
-    max-height: 100vh;
-    border-radius: 0;
-  }
-
-  .steve-ai-toggle {
+  :host {
     bottom: 16px;
     right: 16px;
+  }
+
+  .steve-ai-window {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-height: 70vh;
+    border-radius: 12px 12px 0 0;
   }
 }
 `; // Replaced at build time, or inlined below
@@ -467,54 +448,43 @@ class SteveAIWidget extends HTMLElement {
 
   _render() {
     const isPrivate = this.mode === "private";
-    const title = isPrivate ? "Ask Steve AI (Private)" : "Ask Steve AI";
-    const subtitle = isPrivate
-      ? "Authenticated access"
-      : "Learn about Steve's experience";
+    const title = isPrivate ? "Ask Steve AI (Private)" : "Ask Steve";
+    const subtitle = isPrivate ? "Authenticated Access" : "AI · Live";
     const greeting = isPrivate
       ? "Hey! You have full access. Ask me anything about Steve's work, projects, or strategy."
-      : "Hi there! I'm Steve's AI assistant. Ask me about his experience, skills, leadership philosophy, or anything else you'd like to know.";
+      : "Hi — I'm Steve's AI assistant, trained on his background. Ask me anything about his experience, leadership style, or projects.";
 
     this.shadowRoot.innerHTML = `
       <style>${WIDGET_CSS}</style>
 
-      <button class="steve-ai-toggle" aria-label="Open chat">
-        <svg class="chat-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        </svg>
-        <svg class="close-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-        </svg>
+      <button class="steve-ai-toggle">
+        <span class="ask-dot"></span>
+        Ask Steve
       </button>
 
       <div class="steve-ai-window">
         <div class="steve-ai-header">
-          <div class="steve-ai-avatar">S</div>
           <div class="steve-ai-header-text">
             <h3>${title}</h3>
             <p>${subtitle}</p>
           </div>
+          <button class="steve-ai-close" aria-label="Close">×</button>
         </div>
 
         <div class="steve-ai-messages">
-          <div class="steve-ai-msg bot">${greeting}</div>
+          <div class="steve-ai-msg bot">
+            <span class="steve-ai-by">Steve</span>
+            <div class="steve-ai-msg-content">${greeting}</div>
+          </div>
         </div>
 
         <div class="steve-ai-input-area">
           <textarea
             class="steve-ai-input"
-            placeholder="Type your question..."
+            placeholder="Ask a question…"
             rows="1"
           ></textarea>
-          <button class="steve-ai-send" aria-label="Send message">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-            </svg>
-          </button>
-        </div>
-
-        <div class="steve-ai-footer">
-          Powered by Steve AI
+          <button class="steve-ai-send">Send</button>
         </div>
       </div>
     `;
@@ -523,16 +493,21 @@ class SteveAIWidget extends HTMLElement {
   _attachEvents() {
     const toggle = this.shadowRoot.querySelector(".steve-ai-toggle");
     const window_ = this.shadowRoot.querySelector(".steve-ai-window");
+    const closeBtn = this.shadowRoot.querySelector(".steve-ai-close");
     const input = this.shadowRoot.querySelector(".steve-ai-input");
     const sendBtn = this.shadowRoot.querySelector(".steve-ai-send");
 
     toggle.addEventListener("click", () => {
       this.isOpen = !this.isOpen;
-      toggle.classList.toggle("open", this.isOpen);
       window_.classList.toggle("open", this.isOpen);
       if (this.isOpen) {
         setTimeout(() => input.focus(), 100);
       }
+    });
+
+    closeBtn.addEventListener("click", () => {
+      this.isOpen = false;
+      window_.classList.remove("open");
     });
 
     sendBtn.addEventListener("click", () => this._sendMessage());
@@ -598,6 +573,13 @@ class SteveAIWidget extends HTMLElement {
       const messages = this.shadowRoot.querySelector(".steve-ai-messages");
       const msg = document.createElement("div");
       msg.className = "steve-ai-msg bot";
+      const streamByEl = document.createElement("span");
+      streamByEl.className = "steve-ai-by";
+      streamByEl.textContent = "Steve";
+      msg.appendChild(streamByEl);
+      const streamContent = document.createElement("div");
+      streamContent.className = "steve-ai-msg-content";
+      msg.appendChild(streamContent);
       messages.appendChild(msg);
 
       // Read the SSE stream
@@ -622,7 +604,7 @@ class SteveAIWidget extends HTMLElement {
             const data = JSON.parse(line.substring(6));
             if (data.token) {
               fullText += data.token;
-              msg.innerHTML = this._renderMarkdown(fullText);
+              streamContent.innerHTML = this._renderMarkdown(fullText);
               messages.scrollTop = messages.scrollHeight;
             }
             if (data.error) {
@@ -656,11 +638,19 @@ class SteveAIWidget extends HTMLElement {
     const msg = document.createElement("div");
     msg.className = `steve-ai-msg ${sender}`;
 
+    const byEl = document.createElement("span");
+    byEl.className = "steve-ai-by";
+    byEl.textContent = sender === "bot" ? "Steve" : "You";
+    msg.appendChild(byEl);
+
+    const content = document.createElement("div");
+    content.className = "steve-ai-msg-content";
     if (sender === "bot") {
-      msg.innerHTML = this._renderMarkdown(text);
+      content.innerHTML = this._renderMarkdown(text);
     } else {
-      msg.textContent = text;
+      content.textContent = text;
     }
+    msg.appendChild(content);
 
     messages.appendChild(msg);
     messages.scrollTop = messages.scrollHeight;

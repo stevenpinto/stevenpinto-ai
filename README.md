@@ -14,9 +14,9 @@ index.html              Main single-page site
 linkedin/index.html     LinkedIn redirect (tracks clicks via GA4)
 admin.html              Ask Steve AI feedback admin (not public)
 favicon.ico             Site favicon
-css/style.css           All styles (dark/light theme)
+css/style.css           Paper/ink/rust design system, light/dark theme tokens
 css/lab-article.css     Styles for lab article pages
-js/main.js              Animations, scroll, theme toggle, nav
+js/main.js              Theme toggle (localStorage), mobile nav
 js/steve-ai-widget.js   Ask Steve AI chatbot widget
 images/                 Project screenshots and profile photo
 lab/                    "In the Lab" article pages

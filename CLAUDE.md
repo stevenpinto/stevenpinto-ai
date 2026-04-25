@@ -1,13 +1,13 @@
 # stevenpinto.com — Personal Portfolio Site
 
 ## What This Is
-Steven Pinto's personal portfolio website at stevenpinto.com. Static site (vanilla HTML/CSS/JS, no framework) showcasing experience, projects, articles, interests, and an AI chatbot ("Ask Steve AI").
+Steven Pinto's personal portfolio website at stevenpinto.com. Static site (vanilla HTML/CSS/JS, no framework) targeting executive recruiters and hiring managers. Editorial paper/ink/rust design system — Fraunces serif + Inter sans-serif, warm off-white backgrounds, single rust accent color.
 
 ## Project Structure
-- `index.html` — Single-page site with all sections (nav, hero, about, experience, projects, articles, interests, Ask Steve AI, contact)
-- `css/style.css` — All styles, dark/light theme support
-- `js/main.js` — Animations, scroll reveals, theme toggle, navigation
-- `js/steve-ai-widget.js` — Ask Steve AI chatbot widget (web component, calls a serverless RAG backend)
+- `index.html` — Single-page site. Section order: Nav → Hero → Stats → Experience → Projects → Lab → Writing → Ask Steve AI → Contact → Footer
+- `css/style.css` — All styles. Paper/ink/rust design tokens, Fraunces + Inter fonts, light/dark theme via `data-theme="dark"` on `<html>`
+- `js/main.js` — Theme toggle (persists to localStorage, defaults to light), mobile nav toggle
+- `js/steve-ai-widget.js` — Ask Steve AI chatbot widget (web component, pill-style toggle button, calls a serverless RAG backend)
 - `images/` — Project screenshots and profile photo
 - `favicon.ico` — Site favicon (root level)
 - `admin.html` — Feedback admin UI (not linked publicly). Enter admin key to view/manage thumbs up/down feedback from Ask Steve AI. API URL is hardcoded to the Lambda endpoint.
@@ -22,14 +22,14 @@ Steven Pinto's personal portfolio website at stevenpinto.com. Static site (vanil
 - **Secrets needed:** `AWS_ROLE_ARN`, `S3_BUCKET`, `CLOUDFRONT_DISTRIBUTION_ID`
 
 ## Projects Section
-Each project card has: screenshot image, title, description, tech tags, and optional "Visit Site" link. Images use `object-fit: cover` by default. Landscape screenshots work best for the 180px-tall card image area.
+Each project card uses classes: `.proj` (wrapper `<a>` or `<div>`), `.proj__img` (16:10 aspect ratio cover image), `.proj__kind` (label, uppercase small), `.proj__name` (Fraunces serif), `.proj__desc`, `.proj__link` (accent-colored). 3-column grid on desktop, collapses to 2 then 1.
 
 Current projects:
 1. **MyHaloBar** — IoT cocktail bar (myhalobar.com)
-2. **DevTel Home Intelligence** — Smart home services (devtel.com), vanilla HTML/CSS/JS site
-3. **SaaS-Aware** — Shadow IT detection (saas-aware.com), React/Express/MongoDB/ECS Fargate/ALB/Chrome Extension
+2. **SaaS-Aware** — Shadow IT detection (saas-aware.com), React/Express/MongoDB/ECS Fargate/ALB/Chrome Extension
+3. **DevTel Home Intelligence** — Smart home services (devtel.com), vanilla HTML/CSS/JS site
 4. **Ask Steve AI** — RAG chatbot on this site (Claude/LangChain/Pinecone)
-5. **Integrations** — Enterprise integration platform (no public link)
+5. **Employee Lifecycle Platform** — Enterprise integration platform (no public link)
 6. **Nutrient Dosing System** — IoT hardware project
 
 ## Ask Steve AI
@@ -124,7 +124,21 @@ When creating or updating a lab article, also create/update a corresponding mark
 
 These files power the Ask Steve AI chatbot. Include: overview, status, motivation, tech stack, architecture details, approach, key learnings, what's next, and technologies used.
 
+## Design System
+CSS custom properties defined in `css/style.css`. Light theme is default (no attribute on `<html>`); dark theme applies when `data-theme="dark"` is set by JS from localStorage.
+
+Key tokens:
+- `--paper` / `--paper-2` — background surfaces (warm off-white / slightly darker)
+- `--ink` / `--ink-2` / `--ink-3` — text hierarchy (near-black → secondary → tertiary)
+- `--rule` / `--rule-soft` — border colors (strong / subtle)
+- `--accent` — single rust accent (`#8a3a1a` light, `#d97a4a` dark)
+- `--sans` — Inter; `--serif` — Fraunces (loaded from Google Fonts)
+
+Nav class compatibility: lab article pages use `.nav`, `.nav-inner`, `.nav-logo` — these must remain in `style.css`. The main page uses `.nav-brand` for the wordmark. Do not remove `.nav-logo`.
+
+Lab article backward compat classes in `style.css` (do not remove): `.project-tech`, `.project-link`, `.lab-status`, `.lab-status-active`, `.lab-status-building`, `.lab-status-planning`, `.lab-status-complete`.
+
 ## Key Conventions
 - No build step — edit files directly and push
 - All project screenshots go in `images/` as `{project-name}.jpg`
-- Dark theme is default (`data-theme="dark"` on html element)
+- Light theme is default — JS reads localStorage key `sp-theme`, falls back to `light`

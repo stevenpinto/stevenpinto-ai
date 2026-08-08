@@ -3,23 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Steven Pinto — IT Director</title>
-  <meta name="description" content="Steven Pinto is an IT Director with 20+ years leading enterprise technology, cloud, security, and digital transformation.">
+  <title>Steven Pinto - IT Director</title>
+  <meta name="description" content="Steven Pinto is an IT Director with 20+ years leading enterprise technology, cloud, security, AI, and digital transformation.">
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="canonical" href="https://stevenpinto.com/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://stevenpinto.com/">
-  <meta property="og:title" content="Steven Pinto — IT Director">
-  <meta property="og:description" content="IT Director with 20+ years leading enterprise technology, cloud, security, and digital transformation.">
+  <meta property="og:title" content="Steven Pinto - IT Director">
+  <meta property="og:description" content="Technology leadership with builder instincts. Enterprise IT, security, cloud, AI, and digital transformation.">
   <meta property="og:image" content="https://stevenpinto.com/images/steve.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Steven Pinto — IT Director">
-  <meta name="twitter:description" content="IT Director with 20+ years leading enterprise technology, cloud, security, and digital transformation.">
+  <meta name="twitter:title" content="Steven Pinto - IT Director">
+  <meta name="twitter:description" content="Technology leadership with builder instincts. Enterprise IT, security, cloud, AI, and digital transformation.">
   <meta name="twitter:image" content="https://stevenpinto.com/images/steve.jpg">
 
-  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -38,12 +36,11 @@
   }
   </script>
 
-  <link rel="stylesheet" href="css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/executive.css">
 
-  <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3H5ZRCRHN2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -52,7 +49,6 @@
     gtag('config', 'G-3H5ZRCRHN2');
   </script>
 
-  <!-- Microsoft Clarity -->
   <script>
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -62,367 +58,196 @@
   </script>
 </head>
 <body>
-
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="#top" class="nav-brand">Steven <b>Pinto</b></a>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Steven Pinto home">
+        <span class="brand-mark">SP</span>
+        <span>Steven Pinto</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-links" id="navLinks">
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#lab">Lab</a>
         <a href="#writing">Writing</a>
         <a href="#asksteve">Ask Steve</a>
-        <a href="#contact">Contact</a>
       </div>
-      <div class="nav-right">
-        <button class="nav-theme-btn" id="theme-toggle">Dark</button>
-        <a class="nav-cta" href="mailto:steven.pinto.it@gmail.com">Get in touch</a>
-      </div>
-    </div>
-  </nav>
+      <a class="nav-action" href="mailto:steven.pinto.it@gmail.com">Contact</a>
+    </nav>
+  </header>
 
   <main id="top">
-
-    <!-- Hero -->
     <section class="hero">
-      <div class="container">
-        <div class="hero__grid">
-          <div>
-            <div class="hero__eyebrow">Denver, Colorado &middot; Available for opportunities</div>
-            <h1 class="hero__name">Steven<br>Pinto.</h1>
-            <p class="hero__role">IT Director leading enterprise <em>technology, security &amp; transformation.</em></p>
-            <p class="hero__lede">
-              Twenty years running enterprise IT across PE-backed manufacturing, healthcare,
-              and global beverage operations. I lead teams, own the strategy, and still ship
-              code when it matters.
-            </p>
-            <div class="hero__cta">
-              <a class="btn btn--primary" href="#experience">View experience <span class="arr">&rarr;</span></a>
-              <a class="btn btn--ghost" href="#contact">Get in touch</a>
-            </div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Denver, Colorado / Enterprise IT Operator</p>
+          <h1>Technology leadership with builder instincts.</h1>
+          <p class="hero-lede">
+            I lead enterprise technology, security, cloud transformation, and AI strategy for complex organizations.
+            I am also hands-on enough to prototype the systems, automations, and products that make the strategy real.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#experience">Review experience</a>
+            <a class="button button-secondary" href="#projects">See built work</a>
           </div>
-          <aside>
-            <div class="hero__portrait">
-              <img src="images/steve.jpg" alt="Steven Pinto">
-            </div>
-            <div class="hero__cap">
-              <span>Steven Pinto</span>
-              <span>2026</span>
-            </div>
-          </aside>
         </div>
+        <aside class="hero-panel" aria-label="Steven Pinto profile">
+          <img src="images/steve.jpg" alt="Steven Pinto">
+          <div class="profile-card">
+            <span>Current Role</span>
+            <strong>IT Director, Ampersand Brands</strong>
+          </div>
+        </aside>
+      </div>
+      <div class="metric-strip" aria-label="Career highlights">
+        <div class="metric"><strong>20+</strong><span>Years leading enterprise IT</span></div>
+        <div class="metric"><strong>1k+</strong><span>Brands supported through global operations</span></div>
+        <div class="metric"><strong>4</strong><span>Director-level chapters across varied industries</span></div>
+        <div class="metric"><strong>AI</strong><span>RAG, automation, and applied prototyping</span></div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="stats">
-      <div class="container">
-        <div class="stats__grid">
-          <div>
-            <div class="stat__k">20+</div>
-            <div class="stat__v">Years leading enterprise IT</div>
-          </div>
-          <div>
-            <div class="stat__k">1,000+</div>
-            <div class="stat__v">Brands whose IT ran through my team</div>
-          </div>
-          <div>
-            <div class="stat__k">7</div>
-            <div class="stat__v">Industries, from healthcare to beverage</div>
-          </div>
-          <div>
-            <div class="stat__k">3</div>
-            <div class="stat__v">Director-level roles, each one built from scratch</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience -->
     <section class="section" id="experience">
-      <div class="container">
-        <header class="section__head">
-          <div class="section__label">Experience</div>
-          <div>
-            <h2 class="section__title">A career spent <em>leading</em> and <em>building.</em></h2>
-            <p class="section__sub">Four director-level postings across healthcare, beverage, and manufacturing. Plus a deliberate 2025 sabbatical to actually go build things.</p>
-          </div>
-        </header>
-        <div class="exp">
-
-          <div class="exp__row">
-            <div class="exp__when">
-              Dec 2025 &mdash; Present
-              <div class="exp__state">Current</div>
-            </div>
-            <div>
-              <h3 class="exp__title">IT Director</h3>
-              <p class="exp__org">Ampersand Brands <span>&middot; Hammond's Candies, Lolli &amp; Pops</span></p>
-              <p class="exp__body">Leading enterprise IT across a PE-backed retail and manufacturing organization. Driving ERP transformation to NetSuite, Microsoft 365 tenant consolidation, Zero Trust security, and AI/data platform strategy.</p>
-              <div class="exp__tags">
-                <span>NetSuite</span><span>Microsoft 365</span><span>Zero Trust</span><span>AI Strategy</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="exp__row">
-            <div class="exp__when">Jan 2025 &mdash; Nov 2025</div>
-            <div>
-              <h3 class="exp__title">Independent projects &amp; study</h3>
-              <p class="exp__org">Sabbatical <span>&middot; Applied AI, IoT, and serverless</span></p>
-              <p class="exp__body">After 15 years in a director chair, I took a year to actually build. Shipped an IoT cocktail platform, automated my home on Home Assistant, built and deployed AI applications, and trained small models.</p>
-              <div class="exp__tags">
-                <span>AI / ML</span><span>IoT</span><span>Serverless</span><span>Home Assistant</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="exp__row">
-            <div class="exp__when">Jan 2009 &mdash; Dec 2024</div>
-            <div>
-              <h3 class="exp__title">Director of IT &amp; Security</h3>
-              <p class="exp__org">Park Street Companies <span>&middot; Back-office services for 1,000+ beverage brands</span></p>
-              <p class="exp__body">Directed a global IT team across U.S. and E.U. operations supporting 1,000+ alcoholic beverage brands. Led cloud migrations, built serverless architecture, stood up Zero Trust security, handled M&amp;A IT integration, and shipped internal applications across 15 years of growth.</p>
-              <div class="exp__tags">
-                <span>AWS</span><span>Cloud Migration</span><span>Global Teams</span><span>M&amp;A Integration</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="exp__row">
-            <div class="exp__when">Jan 2002 &mdash; Jan 2009</div>
-            <div>
-              <h3 class="exp__title">Director of IT &amp; Security</h3>
-              <p class="exp__org">Doctor Diabetic Supply <span>&middot; Healthcare / direct-to-consumer</span></p>
-              <p class="exp__body">Centralized IT infrastructure, reduced hardware spend by $50K+ annually, and owned IT security for a healthcare organization serving 12,500+ customers per year.</p>
-              <div class="exp__tags">
-                <span>Healthcare IT</span><span>Cost Optimization</span><span>Infrastructure</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="section" id="projects">
-      <div class="container">
-        <header class="section__head">
-          <div class="section__label">Selected Projects</div>
-          <div>
-            <h2 class="section__title">Beyond leadership, I <em>build.</em></h2>
-            <p class="section__sub">Things I've built outside the day job: products, platforms, and a few internal tools. My take is that IT leaders who stop building lose the ability to judge what's actually hard.</p>
-          </div>
-        </header>
-        <div class="projects__grid">
-
-          <a class="proj" href="https://myhalobar.com" target="_blank" rel="noopener">
-            <div class="proj__img"><img src="images/myhalobar.jpg" alt="MyHaloBar" loading="lazy"></div>
-            <div class="proj__kind">IoT &middot; Consumer</div>
-            <h3 class="proj__name">MyHaloBar</h3>
-            <p class="proj__desc">An IoT-powered automated cocktail platform with AI-generated recipes, hardware pump control, and real-time ordering.</p>
-            <span class="proj__link">Visit site &rarr;</span>
-          </a>
-
-          <a class="proj" href="https://saas-aware.com/" target="_blank" rel="noopener">
-            <div class="proj__img"><img src="images/saas-aware.jpg" alt="SaaS-Aware" loading="lazy"></div>
-            <div class="proj__kind">SaaS &middot; Security</div>
-            <h3 class="proj__name">SaaS-Aware</h3>
-            <p class="proj__desc">A shadow-IT detection platform with a Chrome extension. Tracks unauthorized SaaS usage and enforces SSO adoption.</p>
-            <span class="proj__link">Visit site &rarr;</span>
-          </a>
-
-          <a class="proj" href="https://www.devtel.com" target="_blank" rel="noopener">
-            <div class="proj__img"><img src="images/devtel.jpg" alt="DevTel Home Intelligence" loading="lazy"></div>
-            <div class="proj__kind">Services &middot; Smart Home</div>
-            <h3 class="proj__name">DevTel Home Intelligence</h3>
-            <p class="proj__desc">Smart home design, installation, and automation services built on Home Assistant: lighting, security, and whole-home control.</p>
-            <span class="proj__link">Visit site &rarr;</span>
-          </a>
-
-          <a class="proj" href="#ask">
-            <div class="proj__img"><img src="images/asksteve.jpg" alt="Ask Steve AI" loading="lazy"></div>
-            <div class="proj__kind">AI &middot; RAG</div>
-            <h3 class="proj__name">Ask Steve AI</h3>
-            <p class="proj__desc">The assistant in the corner of this site. Dual-agent RAG architecture built on Claude, LangChain, and Pinecone.</p>
-            <span class="proj__link">Try it &darr;</span>
-          </a>
-
-          <div class="proj">
-            <div class="proj__img"><img src="images/integrations.jpg" alt="Employee Lifecycle Platform" loading="lazy"></div>
-            <div class="proj__kind">Internal Platform</div>
-            <h3 class="proj__name">Employee Lifecycle Platform</h3>
-            <p class="proj__desc">Integration platform connecting Google Workspace, Jira Service Desk, FreePBX, and Snipe-IT for automated onboarding and offboarding.</p>
-          </div>
-
-          <a class="proj" href="https://photos.app.goo.gl/VBtYuYaXAKWdeMQP6" target="_blank" rel="noopener">
-            <div class="proj__img"><img src="images/nutrient-dosing.jpg" alt="Nutrient Dosing System" loading="lazy"></div>
-            <div class="proj__kind">Hardware &middot; IoT</div>
-            <h3 class="proj__name">Nutrient Dosing System</h3>
-            <p class="proj__desc">A custom-built automated nutrient dosing system combining electronics, IoT hardware, and software control.</p>
-            <span class="proj__link">View photos &rarr;</span>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Lab -->
-    <section class="section" id="lab">
-      <div class="container">
-        <header class="section__head">
-          <div class="section__label">In Progress</div>
-          <div>
-            <h2 class="section__title">What I'm exploring <em>right now.</em></h2>
-          </div>
-        </header>
-        <div class="lab__grid">
-
-          <a class="lab__item" href="lab/knowledge-base/index.html">
-            <div class="lab__top">
-              <span class="lab__status is-active">Active</span>
-              <span class="lab__id">L-01</span>
-            </div>
-            <div class="lab__name">Mnemon &mdash; Local RAG Server</div>
-            <div class="lab__desc">A self-hosted AI inference and RAG server running entirely on local hardware. No API costs, no data leaving the network.</div>
-            <span class="lab__link">Read more &rarr;</span>
-          </a>
-
-          <a class="lab__item" href="lab/halobar-hardware/index.html">
-            <div class="lab__top">
-              <span class="lab__status">Building</span>
-              <span class="lab__id">L-03</span>
-            </div>
-            <div class="lab__name">HaloBar Hardware Build</div>
-            <div class="lab__desc">The physical build of the automated bartender: pump systems, electronics, enclosure design, and the actual assembly.</div>
-            <span class="lab__link">Read more &rarr;</span>
-          </a>
-
-          <a class="lab__item" href="lab/robotic-pruner/index.html">
-            <div class="lab__top">
-              <span class="lab__status">Planning</span>
-              <span class="lab__id">L-02</span>
-            </div>
-            <div class="lab__name">AI Robotic Pruner</div>
-            <div class="lab__desc">An AI-powered robotic arm with scissors that identifies and prunes specific plants using computer vision.</div>
-            <span class="lab__link">Read more &rarr;</span>
-          </a>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Writing -->
-    <section class="section" id="writing">
-      <div class="container">
-        <header class="section__head">
-          <div class="section__label">Writing</div>
-          <div>
-            <h2 class="section__title">Recent <em>articles.</em></h2>
-          </div>
-        </header>
-        <div class="writing">
-          <a href="https://www.linkedin.com/pulse/weekend-engineering-building-serverless-rag-pipeline-from-pinto-0jtsc" target="_blank" rel="noopener">
-            <span class="w-date">March 2026</span>
-            <span class="w-title">Weekend Engineering: Building a Serverless RAG Pipeline from Scratch</span>
-            <span class="w-src">LinkedIn &rarr;</span>
-          </a>
-          <a href="https://www.linkedin.com/pulse/choosing-right-saas-products-why-saml-api-access-should-steven-pinto-qby1c/" target="_blank" rel="noopener">
-            <span class="w-date">March 2025</span>
-            <span class="w-title">Choosing the Right SaaS Products: Why SAML and API Access Should Be Standard</span>
-            <span class="w-src">LinkedIn &rarr;</span>
-          </a>
-          <a href="https://www.linkedin.com/pulse/power-jira-service-desk-automation-streamlining-employee-steven-pinto-ityzc" target="_blank" rel="noopener">
-            <span class="w-date">March 2025</span>
-            <span class="w-title">The Power of Jira Service Desk Automation: Streamlining Employee Onboarding</span>
-            <span class="w-src">LinkedIn &rarr;</span>
-          </a>
-          <a href="https://medium.com/@steven.pinto/why-home-assistant-is-the-superior-smart-home-platform-0eea779797b2" target="_blank" rel="noopener">
-            <span class="w-date">February 2025</span>
-            <span class="w-title">Why Home Assistant is the Superior Smart Home Platform</span>
-            <span class="w-src">Medium &rarr;</span>
-          </a>
-          <a href="https://www.linkedin.com/pulse/why-hosting-sveltekit-web-app-aws-serverless-smart-move-steven-pinto-vp3lf/" target="_blank" rel="noopener">
-            <span class="w-date">February 2025</span>
-            <span class="w-title">Why Hosting a SvelteKit Web App on AWS with Serverless is a Smart Move</span>
-            <span class="w-src">LinkedIn &rarr;</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ask Steve AI -->
-    <section class="section" id="asksteve">
-      <div class="container">
-        <header class="section__head">
-          <div class="section__label">Ask Steve AI</div>
-          <div>
-            <h2 class="section__title">Don't take my word for it. <em>Ask the bot.</em></h2>
-            <p class="section__sub">A generative AI chatbot trained on my background, built on Claude, LangChain, and Pinecone. Ask it anything about my experience, projects, or leadership style.</p>
-          </div>
-        </header>
+      <div class="section-head">
+        <p class="section-label">Operating History</p>
         <div>
-          <button class="btn btn--primary" id="openChatbot">Start a conversation &rarr;</button>
-          <div class="asksteve-chips">
-            <span class="asksteve-chip">"What's Steve's tech stack?"</span>
-            <span class="asksteve-chip">"Tell me about MyHaloBar"</span>
-            <span class="asksteve-chip">"What's Steve's leadership style?"</span>
-            <span class="asksteve-chip">"What did Steve build during his sabbatical?"</span>
+          <h2>Director-level IT work across manufacturing, retail, beverage, and healthcare.</h2>
+          <p>Focused on modernizing platforms, reducing operational drag, hardening security, and helping teams move faster without losing control.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <article class="timeline-row">
+          <time>Dec 2025 - Present</time>
+          <div>
+            <span class="status">Current</span>
+            <h3>IT Director, Ampersand Brands</h3>
+            <p>Leading enterprise IT for a PE-backed retail and manufacturing group, including Sage 100 modernization, Microsoft 365 consolidation, Zero Trust security, AI/data platform strategy, and internal operations tooling.</p>
+            <div class="tags"><span>Sage 100</span><span>Microsoft 365</span><span>Zero Trust</span><span>AI Strategy</span></div>
           </div>
-        </div>
+        </article>
+        <article class="timeline-row">
+          <time>Jan 2025 - Nov 2025</time>
+          <div>
+            <h3>Independent Projects and Study</h3>
+            <p>Used a deliberate build year to ship AI applications, IoT systems, Home Assistant automation, serverless apps, and hands-on experiments with local AI workflows.</p>
+            <div class="tags"><span>AI / ML</span><span>IoT</span><span>Serverless</span><span>Home Assistant</span></div>
+          </div>
+        </article>
+        <article class="timeline-row">
+          <time>Jan 2009 - Dec 2024</time>
+          <div>
+            <h3>Director of IT and Security, Park Street Companies</h3>
+            <p>Directed a global IT team supporting 1,000+ beverage brands. Led cloud migrations, serverless architecture, SaaS governance, M&amp;A integration, and internal application delivery.</p>
+            <div class="tags"><span>AWS</span><span>Cloud Migration</span><span>Global Teams</span><span>M&amp;A Integration</span></div>
+          </div>
+        </article>
+        <article class="timeline-row">
+          <time>Jan 2002 - Jan 2009</time>
+          <div>
+            <h3>Director of IT and Security, Doctor Diabetic Supply</h3>
+            <p>Centralized IT infrastructure, reduced annual hardware spend by $50K+, and owned security operations for a healthcare organization serving 12,500+ customers per year.</p>
+            <div class="tags"><span>Healthcare IT</span><span>Infrastructure</span><span>Cost Control</span></div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section section--noborder" id="contact">
-      <div class="container">
-        <h2 class="contact__big">Let's <em>talk.</em></h2>
-        <p class="contact__lead">Currently IT Director at Ampersand Brands, and open to conversations about senior IT leadership roles. The fastest way to reach me is email.</p>
-        <div class="contact__grid">
-          <a class="contact__item" href="mailto:steven.pinto.it@gmail.com">
-            <span class="contact__k">Email</span>
-            <span class="contact__v">steven.pinto.it@gmail.com</span>
-          </a>
-          <a class="contact__item" href="tel:+17208186914">
-            <span class="contact__k">Phone</span>
-            <span class="contact__v">(720) 818-6914</span>
-          </a>
-          <a class="contact__item" href="https://www.linkedin.com/in/steven-pinto-3714985" target="_blank" rel="noopener">
-            <span class="contact__k">LinkedIn</span>
-            <span class="contact__v">/in/steven-pinto</span>
-          </a>
-          <a class="contact__item" href="https://x.com/StevenPinto11" target="_blank" rel="noopener">
-            <span class="contact__k">X / Twitter</span>
-            <span class="contact__v">@StevenPinto11</span>
-          </a>
-          <a class="contact__item" href="https://www.instagram.com/plumpyfool/" target="_blank" rel="noopener">
-            <span class="contact__k">Instagram</span>
-            <span class="contact__v">@plumpyfool</span>
-          </a>
-          <a class="contact__item" href="https://www.facebook.com/steven.pinto.71" target="_blank" rel="noopener">
-            <span class="contact__k">Facebook</span>
-            <span class="contact__v">steven.pinto.71</span>
-          </a>
+    <section class="section section-alt" id="projects">
+      <div class="section-head">
+        <p class="section-label">Selected Systems</p>
+        <div>
+          <h2>Projects that show the range: AI, IoT, security, and internal platforms.</h2>
+          <p>The through-line is practical execution: products and systems that connect real-world operations to clean software, cloud, and automation.</p>
         </div>
+      </div>
+      <div class="project-grid">
+        <a class="project-card project-featured" href="https://myhalobar.com" target="_blank" rel="noopener">
+          <img src="images/myhalobar.jpg" alt="MyHaloBar">
+          <div><span>IoT Product</span><h3>MyHaloBar</h3><p>Automated cocktail platform with pump control, ordering flows, and AI-generated recipes.</p></div>
+        </a>
+        <a class="project-card" href="https://saas-aware.com/" target="_blank" rel="noopener">
+          <img src="images/saas-aware.jpg" alt="SaaS-Aware">
+          <div><span>Security SaaS</span><h3>SaaS-Aware</h3><p>Shadow-IT detection and SSO adoption visibility through a browser extension.</p></div>
+        </a>
+        <a class="project-card" href="https://www.devtel.com" target="_blank" rel="noopener">
+          <img src="images/devtel.jpg" alt="DevTel Home Intelligence">
+          <div><span>Smart Home</span><h3>DevTel Home Intelligence</h3><p>Home Assistant-based smart home design, installation, and automation services.</p></div>
+        </a>
+        <a class="project-card" href="#asksteve">
+          <img src="images/asksteve.jpg" alt="Ask Steve AI">
+          <div><span>AI / RAG</span><h3>Ask Steve AI</h3><p>Personal assistant backed by curated professional knowledge and production AWS hosting.</p></div>
+        </a>
+        <article class="project-card">
+          <img src="images/integrations.jpg" alt="Employee Lifecycle Platform">
+          <div><span>Internal Platform</span><h3>Employee Lifecycle Platform</h3><p>Automation connecting Google Workspace, Jira Service Desk, FreePBX, and Snipe-IT.</p></div>
+        </article>
+        <a class="project-card" href="https://photos.app.goo.gl/VBtYuYaXAKWdeMQP6" target="_blank" rel="noopener">
+          <img src="images/nutrient-dosing.jpg" alt="Nutrient Dosing System">
+          <div><span>Hardware / IoT</span><h3>Nutrient Dosing System</h3><p>Custom automated nutrient dosing system combining electronics, IoT, and software control.</p></div>
+        </a>
       </div>
     </section>
 
+    <section class="section" id="lab">
+      <div class="section-head">
+        <p class="section-label">In Progress</p>
+        <div><h2>Current explorations that keep the builder muscles honest.</h2></div>
+      </div>
+      <div class="lab-grid">
+        <a class="lab-item" href="lab/knowledge-base/index.html"><span>Active / L-01</span><h3>Mnemon - Local RAG Server</h3><p>Self-hosted AI inference and RAG on local hardware, built for privacy and cost control.</p></a>
+        <a class="lab-item" href="lab/halobar-hardware/index.html"><span>Building / L-03</span><h3>HaloBar Hardware Build</h3><p>Pump systems, electronics, enclosure design, and the physical automated bartender assembly.</p></a>
+        <a class="lab-item" href="lab/robotic-pruner/index.html"><span>Planning / L-02</span><h3>AI Robotic Pruner</h3><p>Computer vision and robotics exploration for identifying and pruning specific plants.</p></a>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="writing">
+      <div class="section-head">
+        <p class="section-label">Writing</p>
+        <div><h2>Recent thinking on automation, SaaS, smart homes, and serverless systems.</h2></div>
+      </div>
+      <div class="writing-list">
+        <a href="https://www.linkedin.com/pulse/weekend-engineering-building-serverless-rag-pipeline-from-pinto-0jtsc" target="_blank" rel="noopener"><span>March 2026</span><strong>Weekend Engineering: Building a Serverless RAG Pipeline from Scratch</strong><em>LinkedIn</em></a>
+        <a href="https://www.linkedin.com/pulse/choosing-right-saas-products-why-saml-api-access-should-steven-pinto-qby1c/" target="_blank" rel="noopener"><span>March 2025</span><strong>Choosing the Right SaaS Products: Why SAML and API Access Should Be Standard</strong><em>LinkedIn</em></a>
+        <a href="https://www.linkedin.com/pulse/power-jira-service-desk-automation-streamlining-employee-steven-pinto-ityzc" target="_blank" rel="noopener"><span>March 2025</span><strong>The Power of Jira Service Desk Automation: Streamlining Employee Onboarding</strong><em>LinkedIn</em></a>
+        <a href="https://medium.com/@steven.pinto/why-home-assistant-is-the-superior-smart-home-platform-0eea779797b2" target="_blank" rel="noopener"><span>February 2025</span><strong>Why Home Assistant is the Superior Smart Home Platform</strong><em>Medium</em></a>
+      </div>
+    </section>
+
+    <section class="ask-section" id="asksteve">
+      <div>
+        <p class="section-label">Ask Steve AI</p>
+        <h2>Ask the live assistant.</h2>
+        <p>Ask about experience, projects, leadership style, AWS, security, or how the chatbot is built.</p>
+      </div>
+      <div class="ask-actions">
+        <button class="button button-primary" id="openChatbot">Start a conversation</button>
+        <button class="prompt-chip" data-open-chat>"What is Steve's tech stack?"</button>
+        <button class="prompt-chip" data-open-chat>"Tell me about MyHaloBar"</button>
+        <button class="prompt-chip" data-open-chat>"What is Steve's leadership style?"</button>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div><p class="section-label">Contact</p><h2>Let's talk.</h2></div>
+      <div class="contact-grid">
+        <a href="mailto:steven.pinto.it@gmail.com"><span>Email</span><strong>steven.pinto.it@gmail.com</strong></a>
+        <a href="tel:+17208186914"><span>Phone</span><strong>(720) 818-6914</strong></a>
+        <a href="https://www.linkedin.com/in/steven-pinto-3714985" target="_blank" rel="noopener"><span>LinkedIn</span><strong>/in/steven-pinto</strong></a>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer__inner">
-        <span>&copy; 2026 Steven Pinto</span>
-        <span>Denver, CO &middot; steven.pinto.it@gmail.com</span>
-      </div>
-    </div>
+    <span>&copy; 2026 Steven Pinto</span>
+    <span>Denver, CO / steven.pinto.it@gmail.com</span>
   </footer>
 
-  <!-- Ask Steve AI Widget -->
   <script src="js/steve-ai-widget.js"></script>
   <steve-ai-widget id="ask" mode="public" api-url="https://aqjiq7s2t8.execute-api.us-east-1.amazonaws.com"></steve-ai-widget>
-
-  <script src="js/main.js"></script>
+  <script src="js/executive.js"></script>
 </body>
 </html>

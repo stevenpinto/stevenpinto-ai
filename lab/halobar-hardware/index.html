@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,7 @@
   <meta name="twitter:description" content="The physical build of the automated bartender. Pump systems, electronics, enclosure design, and hardware integration.">
   <meta name="twitter:image" content="https://stevenpinto.com/lab/halobar-hardware/images/rendering.jpg">
 
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/executive.css">
   <link rel="stylesheet" href="../../css/lab-article.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,18 +45,34 @@
 </head>
 <body>
 
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a href="../../" class="nav-logo">SP</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="../../#lab">&larr; Back</a></li>
-      </ul>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="Primary navigation">
+      <a class="brand" href="../../" aria-label="Steven Pinto home">
+        <span class="brand-mark">SP</span>
+        <span>Steven Pinto</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-    </div>
-  </nav>
+      <div class="nav-links" id="navLinks">
+        <a href="../../#experience">Experience</a>
+        <a href="../../#projects">Projects</a>
+        <a href="../../#lab">Lab</a>
+        <a href="../../#writing">Writing</a>
+        <a href="../../#asksteve">Ask Steve</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+          <svg class="icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a7 7 0 1 0 11 11z"/></svg>
+          <span class="theme-toggle-label visually-hidden">Dark mode</span>
+        </button>
+        <a class="nav-action" href="../../#lab">Back</a>
+      </div>
+    </nav>
+  </header>
 
   <article class="lab-article">
     <div class="container">
@@ -166,6 +182,6 @@ The dispensing nozzles are mounted on the front column in a 4x4 grid. Each one m
   <script src="../../js/steve-ai-widget.js"></script>
   <steve-ai-widget mode="public" api-url="https://aqjiq7s2t8.execute-api.us-east-1.amazonaws.com"></steve-ai-widget>
 
-  <script src="../../js/main.js"></script>
+  <script src="../../js/executive.js"></script>
 </body>
 </html>

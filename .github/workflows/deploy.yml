@@ -29,6 +29,8 @@ jobs:
           aws s3 sync . s3://${{ secrets.S3_BUCKET }} --delete \
             --exclude ".git/*" \
             --exclude ".github/*" \
+            --exclude ".claude/*" \
+            --exclude ".vscode/*" \
             --exclude "README.md"
 
       # ---------- INVALIDATE CLOUDFRONT ----------

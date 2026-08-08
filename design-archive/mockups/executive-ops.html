@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steven Pinto Mockup - Executive Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6f3;
+      --ink: #111719;
+      --muted: #5d6768;
+      --line: #d8ded9;
+      --panel: #ffffff;
+      --green: #196b5b;
+      --blue: #294f7a;
+      --gold: #b7832f;
+      --max: 1220px;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Inter, system-ui, sans-serif; color: var(--ink); background: var(--bg); }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .topbar { position: sticky; top: 0; z-index: 5; background: rgba(244,246,243,.92); border-bottom: 1px solid var(--line); backdrop-filter: blur(12px); }
+    .nav { max-width: var(--max); margin: 0 auto; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 800; letter-spacing: 0; }
+    .links { display: flex; gap: 22px; font-size: 13px; color: var(--muted); }
+    .contact { border: 1px solid var(--ink); border-radius: 3px; padding: 8px 12px; font-size: 13px; font-weight: 700; }
+    .hero { border-bottom: 1px solid var(--line); }
+    .hero-inner { max-width: var(--max); margin: 0 auto; padding: 56px 28px 44px; display: grid; grid-template-columns: minmax(0, 1.15fr) 380px; gap: 44px; align-items: end; }
+    .kicker { display: inline-flex; gap: 12px; align-items: center; color: var(--green); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; font-weight: 800; }
+    .kicker:before { content: ""; width: 34px; height: 2px; background: var(--green); }
+    h1 { margin: 18px 0 0; font-size: clamp(48px, 7vw, 92px); line-height: .93; letter-spacing: 0; max-width: 830px; }
+    .lede { margin: 24px 0 0; max-width: 720px; color: var(--muted); font-size: clamp(17px, 2vw, 21px); line-height: 1.55; }
+    .actions { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 4px; padding: 0 16px; font-weight: 800; font-size: 14px; }
+    .btn.primary { background: var(--ink); color: #fff; }
+    .btn.secondary { background: transparent; border: 1px solid var(--line); }
+    .portrait { background: var(--panel); border: 1px solid var(--line); padding: 10px; }
+    .portrait img { aspect-ratio: 4 / 5; width: 100%; object-fit: cover; }
+    .status-strip { max-width: var(--max); margin: 0 auto; padding: 0 28px 42px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; }
+    .metric { background: var(--panel); border: 1px solid var(--line); padding: 20px; min-height: 118px; }
+    .metric strong { display: block; font-size: 34px; line-height: 1; }
+    .metric span { display: block; margin-top: 12px; color: var(--muted); font-size: 13px; line-height: 1.35; }
+    .section { max-width: var(--max); margin: 0 auto; padding: 58px 28px; }
+    .section-head { display: grid; grid-template-columns: 220px 1fr; gap: 36px; align-items: start; margin-bottom: 28px; }
+    .label { color: var(--green); font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    h2 { margin: 0; font-size: clamp(30px, 4vw, 52px); line-height: 1; letter-spacing: 0; }
+    .ops-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); }
+    .ops-row { display: grid; grid-template-columns: 132px 1fr; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+    .ops-row:nth-child(odd) { padding-right: 28px; border-right: 1px solid var(--line); }
+    .date { color: var(--muted); font-size: 13px; font-weight: 700; }
+    .ops-row h3 { margin: 0; font-size: 20px; }
+    .ops-row p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    .projects { display: grid; grid-template-columns: 1.2fr .8fr .8fr; gap: 18px; }
+    .project { background: var(--panel); border: 1px solid var(--line); }
+    .project img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-bottom: 1px solid var(--line); }
+    .project-body { padding: 18px; }
+    .project .kind { color: var(--gold); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 800; }
+    .project h3 { margin: 9px 0 8px; font-size: 22px; }
+    .project p { margin: 0; color: var(--muted); line-height: 1.5; font-size: 14px; }
+    .chat { position: fixed; right: 24px; bottom: 24px; width: min(380px, calc(100vw - 32px)); background: #fff; border: 1px solid #cfd7d2; box-shadow: 0 20px 60px rgba(17,23,25,.18); border-radius: 6px; overflow: hidden; }
+    .chat-head { background: var(--ink); color: #fff; padding: 16px; display: flex; align-items: center; justify-content: space-between; }
+    .chat-head strong { font-size: 14px; }
+    .chat-head span { color: #b8c7c2; font-size: 12px; }
+    .chat-body { padding: 16px; display: grid; gap: 12px; }
+    .bubble { border-radius: 5px; padding: 12px; font-size: 13px; line-height: 1.45; }
+    .bubble.bot { background: #eef3ef; }
+    .bubble.user { background: #e9eef5; justify-self: end; max-width: 82%; }
+    .chat-input { border-top: 1px solid var(--line); padding: 12px; display: flex; gap: 8px; }
+    .chat-input div { flex: 1; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 10px; font-size: 13px; }
+    .chat-input button { border: 0; border-radius: 4px; background: var(--green); color: white; padding: 0 13px; font-weight: 800; }
+    @media (max-width: 860px) {
+      .hero-inner, .section-head, .ops-grid, .projects { grid-template-columns: 1fr; }
+      .status-strip { grid-template-columns: repeat(2, 1fr); }
+      .ops-row:nth-child(odd) { padding-right: 0; border-right: 0; }
+      .links { display: none; }
+      .chat { position: static; margin: 20px 16px; width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a class="brand" href="../index.html">Steven Pinto</a>
+      <div class="links">
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#ask">Ask Steve</a>
+      </div>
+      <a class="contact" href="mailto:steven.pinto.it@gmail.com">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">Enterprise IT Operator</div>
+          <h1>Technology leadership with builder instincts.</h1>
+          <p class="lede">I lead IT strategy for complex organizations, consolidate messy systems, strengthen security posture, and build practical AI and automation tools when the job needs hands-on execution.</p>
+          <div class="actions">
+            <a class="btn primary" href="#experience">Review Experience</a>
+            <a class="btn secondary" href="#projects">See Built Work</a>
+          </div>
+        </div>
+        <aside class="portrait">
+          <img src="../images/steve.jpg" alt="Steven Pinto">
+        </aside>
+      </div>
+      <div class="status-strip">
+        <div class="metric"><strong>20+</strong><span>Years in enterprise technology leadership</span></div>
+        <div class="metric"><strong>1k+</strong><span>Brands supported through global operations</span></div>
+        <div class="metric"><strong>AWS</strong><span>Serverless systems, cloud migration, and cost control</span></div>
+        <div class="metric"><strong>AI</strong><span>RAG apps, automation, and hands-on prototyping</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="section-head">
+        <div class="label">Operating History</div>
+        <h2>Director-level IT work across manufacturing, retail, beverage, and healthcare.</h2>
+      </div>
+      <div class="ops-grid">
+        <div class="ops-row"><div class="date">2025 - Now</div><div><h3>Ampersand Brands</h3><p>NetSuite transformation, Microsoft 365 consolidation, Zero Trust security, and AI/data platform direction.</p></div></div>
+        <div class="ops-row"><div class="date">2025</div><div><h3>Independent build year</h3><p>AI applications, IoT systems, Home Assistant automation, and serverless project work.</p></div></div>
+        <div class="ops-row"><div class="date">2009 - 2024</div><div><h3>Park Street Companies</h3><p>Global IT leadership, cloud migrations, internal apps, M&amp;A integration, and SaaS governance.</p></div></div>
+        <div class="ops-row"><div class="date">2002 - 2009</div><div><h3>Doctor Diabetic Supply</h3><p>Healthcare IT security, infrastructure centralization, and annual hardware cost reductions.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-head">
+        <div class="label">Selected Systems</div>
+        <h2>Projects that show the range: AI, IoT, security, and internal platforms.</h2>
+      </div>
+      <div class="projects">
+        <article class="project"><img src="../images/myhalobar.jpg" alt="MyHaloBar"><div class="project-body"><div class="kind">IoT Product</div><h3>MyHaloBar</h3><p>Automated cocktail platform with pump control, ordering, and AI-generated recipes.</p></div></article>
+        <article class="project"><img src="../images/saas-aware.jpg" alt="SaaS-Aware"><div class="project-body"><div class="kind">Security SaaS</div><h3>SaaS-Aware</h3><p>Shadow-IT detection and SSO adoption visibility through a browser extension.</p></div></article>
+        <article class="project"><img src="../images/asksteve.jpg" alt="Ask Steve AI"><div class="project-body"><div class="kind">AI/RAG</div><h3>Ask Steve</h3><p>Personal assistant backed by curated professional knowledge and production AWS hosting.</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <aside class="chat" id="ask" aria-label="Ask Steve mockup">
+    <div class="chat-head"><div><strong>Ask Steve</strong><br><span>RAG assistant online</span></div><span>Live</span></div>
+    <div class="chat-body">
+      <div class="bubble bot">Ask about leadership, AWS, security, AI projects, or the systems behind the work.</div>
+      <div class="bubble user">What kind of IT leader is Steve?</div>
+      <div class="bubble bot">Operator first, builder second: strong on enterprise governance, but still close enough to the code to know what is real.</div>
+    </div>
+    <div class="chat-input"><div>Ask a question...</div><button>Send</button></div>
+  </aside>
+</body>
+</html>

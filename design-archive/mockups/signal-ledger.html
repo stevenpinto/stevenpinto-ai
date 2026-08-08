@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steven Pinto Mockup - Signal Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fbfaf7;
+      --ink: #171717;
+      --muted: #686660;
+      --rule: #dfddd6;
+      --panel: #f0eee8;
+      --wine: #6e2538;
+      --teal: #0c6d70;
+      --steel: #3d5573;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", system-ui, sans-serif; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .nav { max-width: var(--max); margin: 0 auto; padding: 20px 26px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; border-bottom: 1px solid var(--rule); }
+    .nav strong { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+    .nav-center { display: flex; gap: 24px; color: var(--muted); font-size: 13px; }
+    .nav-right { justify-self: end; color: var(--wine); font-weight: 700; font-size: 13px; }
+    .hero { max-width: var(--max); margin: 0 auto; padding: 42px 26px 32px; }
+    .hero-layout { display: grid; grid-template-columns: 1fr 42%; gap: 34px; align-items: stretch; }
+    .headline { min-height: 560px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 1px solid var(--rule); padding-bottom: 28px; }
+    .eyebrow { color: var(--teal); font-weight: 700; font-size: 12px; letter-spacing: .15em; text-transform: uppercase; }
+    h1 { font-family: Newsreader, Georgia, serif; font-size: clamp(58px, 8.8vw, 118px); line-height: .9; letter-spacing: 0; margin: 16px 0; max-width: 780px; font-weight: 650; }
+    .summary { display: grid; grid-template-columns: 160px 1fr; gap: 24px; color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 760px; }
+    .summary b { display: block; color: var(--ink); font-size: 13px; text-transform: uppercase; letter-spacing: .12em; }
+    .photo-stack { display: grid; grid-template-rows: 1fr auto; gap: 14px; }
+    .photo { border: 1px solid var(--rule); background: var(--panel); padding: 12px; }
+    .photo img { width: 100%; height: 100%; min-height: 450px; object-fit: cover; filter: saturate(.92) contrast(1.03); }
+    .caption { display: grid; grid-template-columns: 1fr auto; gap: 12px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .12em; }
+    .marquee { border-block: 1px solid var(--rule); overflow: hidden; }
+    .marquee-inner { max-width: var(--max); margin: 0 auto; padding: 14px 26px; display: flex; flex-wrap: wrap; gap: 10px 24px; color: var(--muted); font-size: 13px; }
+    .marquee-inner span { color: var(--ink); font-weight: 700; }
+    .section { max-width: var(--max); margin: 0 auto; padding: 56px 26px; }
+    .split-head { display: grid; grid-template-columns: 38% 1fr; gap: 44px; align-items: end; margin-bottom: 26px; }
+    h2 { margin: 0; font-family: Newsreader, Georgia, serif; font-size: clamp(36px, 5vw, 68px); line-height: .96; font-weight: 650; letter-spacing: 0; }
+    .split-head p { margin: 0; color: var(--muted); line-height: 1.6; max-width: 600px; }
+    .ledger { border-top: 2px solid var(--ink); }
+    .ledger-row { display: grid; grid-template-columns: 150px 1fr 260px; gap: 28px; padding: 24px 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+    .time { color: var(--wine); font-weight: 700; font-size: 13px; }
+    .ledger-row h3 { margin: 0; font-size: 22px; }
+    .ledger-row p { margin: 8px 0 0; color: var(--muted); line-height: 1.55; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span { border: 1px solid var(--rule); background: #fff; color: var(--muted); padding: 5px 8px; font-size: 12px; border-radius: 3px; }
+    .showcase { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+    .tile { border-top: 2px solid var(--ink); padding-top: 12px; }
+    .tile.wide { grid-column: span 3; }
+    .tile.small { grid-column: span 2; }
+    .tile img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--rule); }
+    .tile h3 { margin: 12px 0 6px; font-size: 20px; }
+    .tile p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .ask-band { background: #182021; color: #f8f5ec; }
+    .ask-inner { max-width: var(--max); margin: 0 auto; padding: 52px 26px; display: grid; grid-template-columns: 1fr 390px; gap: 44px; align-items: center; }
+    .ask-inner h2 { color: #fff; }
+    .ask-inner p { color: #bac7c3; line-height: 1.6; max-width: 620px; }
+    .chat { background: #f8f5ec; color: var(--ink); border-radius: 4px; overflow: hidden; }
+    .chat-top { padding: 14px 16px; border-bottom: 1px solid #d8d2c5; display: flex; justify-content: space-between; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+    .chat-lines { padding: 16px; display: grid; gap: 10px; }
+    .msg { padding: 12px; border-radius: 4px; font-size: 13px; line-height: 1.45; }
+    .msg.a { background: #e7e2d7; }
+    .msg.q { background: #d9e5e4; justify-self: end; max-width: 78%; }
+    .chat-field { border-top: 1px solid #d8d2c5; padding: 12px; display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .chat-field span { border: 1px solid #d8d2c5; padding: 10px; color: var(--muted); font-size: 13px; }
+    .chat-field b { background: var(--wine); color: white; padding: 10px 12px; font-size: 13px; }
+    @media (max-width: 860px) {
+      .nav { grid-template-columns: 1fr auto; }
+      .nav-center { display: none; }
+      .hero-layout, .summary, .split-head, .ledger-row, .ask-inner { grid-template-columns: 1fr; }
+      .headline { min-height: auto; gap: 70px; }
+      .photo img { min-height: 320px; }
+      .tile.wide, .tile.small { grid-column: span 6; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <strong>Steven Pinto</strong>
+    <div class="nav-center">
+      <a href="#ledger">Experience</a>
+      <a href="#work">Built Work</a>
+      <a href="#ask">Ask Steve</a>
+    </div>
+    <a class="nav-right" href="mailto:steven.pinto.it@gmail.com">Email</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-layout">
+        <div class="headline">
+          <div>
+            <div class="eyebrow">Denver / Enterprise IT / Builder</div>
+            <h1>Calm systems for complicated companies.</h1>
+          </div>
+          <div class="summary">
+            <b>Profile</b>
+            <p>IT Director with 20+ years leading infrastructure, security, cloud, ERP, and internal platforms. The work spans board-level strategy and hands-on engineering.</p>
+          </div>
+        </div>
+        <aside class="photo-stack">
+          <div class="photo"><img src="../images/steve.jpg" alt="Steven Pinto"></div>
+          <div class="caption"><span>Leadership / Security / AI</span><span>2026</span></div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="marquee">
+      <div class="marquee-inner">
+        <div><span>20+</span> years leading IT</div>
+        <div><span>1,000+</span> brands supported</div>
+        <div><span>Zero Trust</span> security programs</div>
+        <div><span>NetSuite</span> transformation</div>
+        <div><span>AI/RAG</span> systems</div>
+      </div>
+    </div>
+
+    <section class="section" id="ledger">
+      <div class="split-head">
+        <h2>Experience as a working record.</h2>
+        <p>A less salesy, more credible structure: dates, outcomes, and domains in a dense layout that feels like an executive dossier rather than a template portfolio.</p>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row"><div class="time">2025 - Present</div><div><h3>IT Director, Ampersand Brands</h3><p>Leading enterprise IT across retail and manufacturing, including ERP modernization, tenant consolidation, security, and AI platform strategy.</p></div><div class="tags"><span>NetSuite</span><span>M365</span><span>Security</span></div></div>
+        <div class="ledger-row"><div class="time">2025</div><div><h3>Independent projects and study</h3><p>Shipped AI, IoT, local automation, and serverless systems while rebuilding hands-on engineering depth.</p></div><div class="tags"><span>RAG</span><span>IoT</span><span>AWS</span></div></div>
+        <div class="ledger-row"><div class="time">2009 - 2024</div><div><h3>Director of IT and Security, Park Street</h3><p>Directed global technology operations for a service platform supporting more than 1,000 beverage brands.</p></div><div class="tags"><span>Cloud</span><span>M&amp;A</span><span>Apps</span></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="split-head">
+        <h2>Built work with visible proof.</h2>
+        <p>More imagery, fewer generic feature blocks. The portfolio becomes a set of concrete artifacts rather than a grid of similar cards.</p>
+      </div>
+      <div class="showcase">
+        <article class="tile wide"><img src="../images/myhalobar.jpg" alt="MyHaloBar"><h3>MyHaloBar</h3><p>IoT cocktail automation with hardware control and AI-assisted recipe generation.</p></article>
+        <article class="tile wide"><img src="../images/integrations.jpg" alt="Employee platform"><h3>Employee Lifecycle Platform</h3><p>Automated onboarding and offboarding across Google Workspace, Jira, telephony, and assets.</p></article>
+        <article class="tile small"><img src="../images/saas-aware.jpg" alt="SaaS-Aware"><h3>SaaS-Aware</h3><p>Shadow-IT detection and SSO visibility.</p></article>
+        <article class="tile small"><img src="../images/devtel.jpg" alt="DevTel"><h3>DevTel</h3><p>Home Assistant-based smart home systems.</p></article>
+        <article class="tile small"><img src="../images/nutrient-dosing.jpg" alt="Nutrient dosing"><h3>Nutrient Dosing</h3><p>Custom IoT hardware and software control.</p></article>
+      </div>
+    </section>
+
+    <section class="ask-band" id="ask">
+      <div class="ask-inner">
+        <div>
+          <div class="eyebrow">Ask Steve AI</div>
+          <h2>A focused assistant, not a gimmick.</h2>
+          <p>The chatbot sits as a serious proof point: a production RAG system that answers from curated career context and demonstrates practical AI implementation.</p>
+        </div>
+        <div class="chat">
+          <div class="chat-top"><span>Ask Steve</span><span>Online</span></div>
+          <div class="chat-lines">
+            <div class="msg a">Ask about cloud migrations, security programs, AI projects, or leadership style.</div>
+            <div class="msg q">What did Steve build?</div>
+            <div class="msg a">AI assistants, serverless systems, SaaS governance tools, and IoT hardware projects with real deployment constraints.</div>
+          </div>
+          <div class="chat-field"><span>Ask a question...</span><b>Send</b></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

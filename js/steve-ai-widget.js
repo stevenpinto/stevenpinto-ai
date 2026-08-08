@@ -452,7 +452,7 @@ class SteveAIWidget extends HTMLElement {
     const subtitle = isPrivate ? "Authenticated Access" : "AI · Live";
     const greeting = isPrivate
       ? "Hey! You have full access. Ask me anything about Steve's work, projects, or strategy."
-      : "Hi — I'm Steve's AI assistant, trained on his background. Ask me anything about his experience, leadership style, or projects.";
+      : "Hi, I'm Steve's AI assistant, trained on his background. Ask me anything about his experience, leadership style, or projects.";
 
     this.shadowRoot.innerHTML = `
       <style>${WIDGET_CSS}</style>

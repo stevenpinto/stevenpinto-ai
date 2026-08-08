@@ -52,7 +52,7 @@
   text-transform: uppercase;
 }
 
-.lab-status-active { background: var(--green); border-color: var(--green); color: #fff; }
+.lab-status-active { background: var(--green); border-color: var(--green); color: var(--on-green); }
 .lab-status-building { color: var(--gold); }
 .lab-status-planning { color: var(--soft); }
 
